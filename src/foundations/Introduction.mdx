@@ -1,0 +1,18 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Foundations/Introduction" />
+
+# Above Design System
+
+The component library for Above, built in React + TypeScript and documented here.
+A companion Figma library mirrors the same tokens and components.
+
+## How it fits together
+
+- **`src/styles/tokens.css`** is the single source of truth for color, type, spacing,
+  radius, elevation and motion. Components only ever read these custom properties.
+- **Primitives** (`--above-*`) hold the raw palette and scales. **Semantic tokens**
+  (`--color-*`, `--space-*`, …) are what components use.
+- The **Figma library** variables are generated from the same tokens, so design and code stay aligned.
+
+> ⚠️ Token values are placeholders until they are brought over from the Above design canvas.
