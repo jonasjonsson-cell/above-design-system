@@ -8,7 +8,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
-    "chromatic": "chromatic --exit-zero-on-changes"
+    "chromatic": "chromatic",
+    "ci": "npm run typecheck && npm run chromatic"
   },
   "peerDependencies": {
     "react": ">=18",
