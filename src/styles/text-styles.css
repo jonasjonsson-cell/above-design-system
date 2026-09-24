@@ -1,0 +1,16 @@
+/* Text style classes — one per Figma text style. Use these instead of literal sizes. */
+.text-display-l { font: var(--text-display-l); letter-spacing: var(--tracking-display-l); margin: 0; }
+.text-display-s { font: var(--text-display-s); letter-spacing: var(--tracking-display-s); margin: 0; }
+.text-heading-xl { font: var(--text-heading-xl); letter-spacing: var(--tracking-heading-xl); margin: 0; }
+.text-heading-l { font: var(--text-heading-l); letter-spacing: var(--tracking-heading-l); margin: 0; }
+.text-heading-m { font: var(--text-heading-m); letter-spacing: var(--tracking-heading-m); margin: 0; }
+.text-heading-s { font: var(--text-heading-s); letter-spacing: var(--tracking-heading-s); margin: 0; }
+.text-heading-xs { font: var(--text-heading-xs); letter-spacing: var(--tracking-heading-xs); margin: 0; }
+.text-body-xl { font: var(--text-body-xl); letter-spacing: 0; margin: 0; }
+.text-body-l { font: var(--text-body-l); letter-spacing: 0; margin: 0; }
+.text-body-m { font: var(--text-body-m); letter-spacing: 0; margin: 0; }
+.text-body-s { font: var(--text-body-s); letter-spacing: 0; margin: 0; }
+.text-list-l { font: var(--text-list-l); letter-spacing: 0; margin: 0; }
+.text-list-s { font: var(--text-list-s); letter-spacing: 0; margin: 0; }
+.text-label-l { font: var(--text-label-l); letter-spacing: var(--tracking-label-text); text-transform: uppercase; margin: 0; }
+.text-label-s { font: var(--text-label-s); letter-spacing: var(--tracking-label-text); text-transform: uppercase; margin: 0; }

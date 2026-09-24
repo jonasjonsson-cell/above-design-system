@@ -85,3 +85,36 @@ export const Weights: StoryObj = {
     </div>
   ),
 }
+
+const textStyles: [string, string][] = [
+  ['display-l', 'Suisse BP Int’l · 220 / 0.75 · −6%'],
+  ['display-s', 'Suisse BP Int’l · 180 / 0.8 · −4%'],
+  ['heading-xl', 'Suisse BP Int’l · 120 / 0.85 · −4%'],
+  ['heading-l', 'Suisse BP Int’l · 100 / 0.85 · −4%'],
+  ['heading-m', 'Suisse BP Int’l · 80 / 0.85 · −2%'],
+  ['heading-s', 'Suisse BP Int’l · 60 / 0.9 · −2%'],
+  ['heading-xs', 'Suisse BP Int’l · 48 / 0.9 · −1%'],
+  ['body-xl', 'Suisse BP Int’l · 32 / 1'],
+  ['body-l', 'Suisse BP Int’l · 24 / 1'],
+  ['body-m', 'Suisse BP Int’l · 20 / 1'],
+  ['body-s', 'Suisse BP Int’l · 16 / 1'],
+  ['list-l', 'Suisse BP Int’l Light · 20 / 1.3'],
+  ['list-s', 'Suisse BP Int’l Light · 16 / 1.3'],
+  ['label-l', 'KH Interference · 16 / 1.2 · +6% · caps'],
+  ['label-s', 'KH Interference · 12 / 1.2 · +6% · caps'],
+]
+
+/** The Figma text styles. Headlines dark and grey; body for longer texts; KH Interference for captions and numbers. Use the class, e.g. `className="text-heading-m"`. */
+export const TextStyles: StoryObj = {
+  name: 'Text styles',
+  render: () => (
+    <div data-theme="light" style={{ background: 'var(--white)', color: 'var(--black)', padding: 'var(--space-margin-x)', display: 'grid', gap: 'var(--space-6)', overflow: 'hidden' }}>
+      {textStyles.map(([n, spec]) => (
+        <div key={n} style={{ display: 'grid', gridTemplateColumns: '280px 1fr', alignItems: 'end', gap: 'var(--space-6)', borderTop: '1px solid var(--neutral-grey-01)', paddingTop: 'var(--space-3)' }}>
+          <div className="text-label-s" style={{ color: 'var(--neutral-grey-02)' }}>.text-{n}<br />{spec}</div>
+          <div className={`text-${n}`} style={{ whiteSpace: 'nowrap' }}>{n.startsWith('label') ? 'Case study · 2024/01/19' : n.startsWith('display') ? 'Display' : 'Bring clarity'}</div>
+        </div>
+      ))}
+    </div>
+  ),
+}

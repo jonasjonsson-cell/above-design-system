@@ -1,0 +1,11 @@
+.above-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-card);
+  font: var(--text-body-s);
+  background: var(--neutral-grey-01);
+  color: var(--black);
+}
+.above-tag--light { background: var(--white); }
+.above-tag--highlight { background: var(--color-highlight); color: var(--color-on-highlight); }

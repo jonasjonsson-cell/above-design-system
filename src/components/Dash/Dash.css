@@ -1,0 +1,9 @@
+/* The 5th element — the dash (the macron from the ā mark) used as a layout shape. */
+.above-dash {
+  display: block;
+  aspect-ratio: 56 / 14.773; /* the bar's own proportion in the mark */
+  background: var(--dash-fill, var(--color-text));
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--radius-none);
+}
