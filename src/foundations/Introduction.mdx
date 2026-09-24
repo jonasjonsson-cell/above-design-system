@@ -2,17 +2,30 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 <Meta title="Foundations/Introduction" />
 
-# Above Design System
+# ABOVE Design System
 
-The component library for Above, built in React + TypeScript and documented here.
-A companion Figma library mirrors the same tokens and components.
+A monochrome, Swiss/International-style system for ABOVE, reconstructed from the studio's
+"Visual Design Weekly" deck template and its brand mark. Black ground, white display type,
+one technical-mono header label, and enormous words that bleed off the edges.
+
+## Principles
+
+- **Three values only.** Black `#000`, white `#fff`, off-white `#f9f9f9`. No brand hues, no gradients.
+  Emphasis is white at 100 / 50 / 30% on black.
+- **Two type roles, extreme contrast.** Suisse BP Int'l for display (weight 400, line-height 0.8,
+  negative tracking) and KH Interference for the 12px uppercase mono label.
+- **Hard edges.** Radius 0 everywhere. The tilted photo card is the only ornament, and the only place
+  a radius, border or shadow appears.
+- **Hard cuts.** No easing or bounce. Interaction is an instant invert or opacity shift.
+- **Voice.** Sentence case, fragments, one idea per slide, numerals as graphics, the occasional
+  Swedish word ("Tack!"). No emoji as UI.
 
 ## How it fits together
 
-- **`src/styles/tokens.css`** is the single source of truth for color, type, spacing,
-  radius, elevation and motion. Components only ever read these custom properties.
-- **Primitives** (`--above-*`) hold the raw palette and scales. **Semantic tokens**
-  (`--color-*`, `--space-*`, …) are what components use.
-- The **Figma library** variables are generated from the same tokens, so design and code stay aligned.
+- `src/styles/tokens.css` is the single source of truth. Primitives (`--above-*`) feed semantic
+  tokens (`--color-*`, `--font-*`, `--space-*`…). Components only read semantic tokens.
+- `data-theme="light"` switches to the inverted off-white cover ground.
+- The Figma library variables are generated from the same tokens.
 
-> ⚠️ Token values are placeholders until they are brought over from the Above design canvas.
+> The UI type scale, the 4px spacing scale and the component set beyond HeaderBar, PhotoCard,
+> Display and Logo are additions for interface work — they aren't in the source deck material.

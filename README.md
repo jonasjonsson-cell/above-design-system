@@ -32,7 +32,10 @@ repository secret). Pull requests get a preview build plus visual diffs.
 The Figma library's variables are generated from `tokens.css`. When tokens
 change, re-sync the Figma variables in the same piece of work so the two never drift.
 
-## Status
+## Brand
 
-Token values are **placeholders** until they're brought over from the Above
-design canvas in Claude Design.
+Monochrome, Swiss/International style: black `#000`, white `#fff`, off-white
+`#f9f9f9`; Suisse BP Int'l (display) + KH Interference (mono label); hard edges,
+the tilted photo card as the only ornament. Values come from the "ABOVE Design
+System WiP" export from Claude Design. The brand fonts are licensed — keep this
+repo and the published Storybook access-restricted.

@@ -1,61 +1,75 @@
 /*
- * Above design tokens — THE single source of truth.
+ * ABOVE design tokens — THE single source of truth.
+ * Source: "ABOVE Design System WiP" (Claude Design export, colors_and_type.css).
  * Every component reads these custom properties; nothing is hardcoded.
  * The Figma library's variables are generated from this file.
  *
- * PLACEHOLDER VALUES: replace with the real Above values from the
- * Claude Design canvas before anything is published as final.
- *
  * Two layers:
- *   1. Primitives (--above-*)   raw palette / scales, never used directly in components
- *   2. Semantic   (--color-*, --space-*, ...)   what components consume
+ *   1. Primitives (--above-*)  the brand's raw values — never used directly in components
+ *   2. Semantic               what components consume
+ *
+ * Themes: dark (black ground) is the brand default. [data-theme="light"]
+ * gives the inverted off-white "cover" ground.
  */
 :root {
-  /* ---------- Primitives ---------- */
-  --above-black: #111111;
+  /* ---------- Primitives: palette (the whole brand is three values) ---------- */
+  --above-black: #000000;
   --above-white: #ffffff;
-  --above-gray-50: #f7f7f7;
-  --above-gray-100: #ececec;
-  --above-gray-300: #c8c8c8;
-  --above-gray-500: #8a8a8a;
-  --above-gray-700: #4a4a4a;
-  --above-brand-500: #3b5bfd; /* PLACEHOLDER brand color */
-  --above-brand-600: #2c46d6;
-  --above-red-500: #d93025;
-  --above-green-500: #1e8e3e;
-  --above-amber-500: #f9ab00;
+  --above-offwhite: #f9f9f9;
 
-  /* ---------- Semantic: color ---------- */
-  --color-bg: var(--above-white);
-  --color-bg-subtle: var(--above-gray-50);
-  --color-surface: var(--above-white);
-  --color-border: var(--above-gray-100);
-  --color-border-strong: var(--above-gray-300);
-  --color-text: var(--above-black);
-  --color-text-muted: var(--above-gray-700);
-  --color-text-subtle: var(--above-gray-500);
-  --color-accent: var(--above-brand-500);
-  --color-accent-hover: var(--above-brand-600);
-  --color-on-accent: var(--above-white);
-  --color-danger: var(--above-red-500);
-  --color-success: var(--above-green-500);
-  --color-warning: var(--above-amber-500);
-  --color-focus-ring: var(--above-brand-500);
+  /* ---------- Primitives: type families ---------- */
+  --above-font-display: 'Suisse BP Intl', 'Helvetica Neue', Arial, sans-serif;
+  --above-font-label: 'KH Interference', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* ---------- Semantic: color (dark / default) ---------- */
+  --color-bg: var(--above-black);
+  --color-surface: var(--above-black);
+  --color-text: rgb(255 255 255 / 1);        /* fg1 — primary display */
+  --color-text-muted: rgb(255 255 255 / 0.5); /* fg2 — secondary, labels */
+  --color-text-subtle: rgb(255 255 255 / 0.3);/* fg3 — faint */
+  --color-border: rgb(255 255 255 / 0.3);
+  --color-border-strong: var(--above-white);
+  --color-accent: var(--above-white);         /* emphasis = full white; no brand hue */
+  --color-on-accent: var(--above-black);
+  --color-focus-ring: var(--above-white);
+  --color-photo-border: var(--above-white);
 
   /* ---------- Typography ---------- */
-  --font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; /* PLACEHOLDER */
+  --font-family-display: var(--above-font-display);
+  --font-family-label: var(--above-font-label);
+  --font-family-base: var(--above-font-display);
+  --font-weight-light: 300;
   --font-weight-regular: 400;
+  --font-weight-medium: 500;
   --font-weight-bold: 700;
+
+  /* Display ramp (poster scale — the brand's own values) */
+  --font-size-mega: 515px;   /* bottom-bleed numeral / single word */
+  --font-size-giant: 240px;  /* cover word */
+  --font-size-hero: 160px;   /* standard headline */
+  --font-size-display: 96px; /* secondary statement */
+  --line-height-display: 0.8;
+  --tracking-display: -0.05em;
+  --tracking-mega: -0.08em;
+
+  /* Label (technical mono header) */
+  --font-size-label: 12px;
+  --tracking-label: 0.06em;
+
+  /* UI ramp — NOT in the source material; chosen for interface work */
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.5rem;
   --font-size-2xl: 2rem;
-  --line-height-tight: 1.2;
-  --line-height-base: 1.5;
+  --line-height-tight: 1.1;
+  --line-height-base: 1.4;
 
-  /* ---------- Spacing (4px base) ---------- */
+  /* ---------- Spacing ---------- */
+  --space-margin-x: 18px;      /* brand: hero text left inset */
+  --space-margin-header: 20px; /* brand: header bar inset */
+  /* 4px UI scale — NOT in the source material */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -64,15 +78,32 @@
   --space-8: 2rem;
   --space-12: 3rem;
 
-  /* ---------- Radius / border / elevation / motion ---------- */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
+  /* ---------- Shape / elevation ---------- */
+  --radius-none: 0;            /* layout is hard-edged everywhere */
+  --radius-card: 4px;          /* photo card only */
   --border-width: 1px;
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.08);
-  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.1);
-  --duration-fast: 120ms;
-  --duration-base: 200ms;
-  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --border-width-photo: 8px;
+  --shadow-card: 0 2px 6px 0 rgb(0 0 0 / 0.1), 0 0 2px 0 rgb(0 0 0 / 0.08), 0 0 0 1px rgb(0 0 0 / 0.2);
+  --rotate-card: -9deg;
+
+  /* ---------- Header tab marker ---------- */
+  --size-tab-w: 42px;
+  --size-tab-h: 9px;
+
+  /* ---------- Motion: hard cuts, no easing ---------- */
+  --duration-instant: 0ms;
+  --easing-none: linear;
+}
+
+[data-theme='light'] {
+  --color-bg: var(--above-offwhite);
+  --color-surface: var(--above-offwhite);
+  --color-text: rgb(0 0 0 / 1);
+  --color-text-muted: rgb(0 0 0 / 0.5);
+  --color-text-subtle: rgb(0 0 0 / 0.3);
+  --color-border: rgb(0 0 0 / 0.3);
+  --color-border-strong: var(--above-black);
+  --color-accent: var(--above-black);
+  --color-on-accent: var(--above-white);
+  --color-focus-ring: var(--above-black);
 }

@@ -1,28 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-export function TokenValue({ name }: { name: string }) {
+const label = { fontFamily: 'var(--font-family-label)', fontSize: 'var(--font-size-label)', letterSpacing: 'var(--tracking-label)', color: 'var(--color-text-muted)' }
+
+/** Shows a token swatch and its resolved value in the swatch's own theme context. */
+export function Swatch({ name }: { name: string }) {
+  const ref = useRef<HTMLDivElement>(null)
   const [value, setValue] = useState('')
   useEffect(() => {
-    setValue(getComputedStyle(document.documentElement).getPropertyValue(name).trim())
+    if (ref.current) setValue(getComputedStyle(ref.current).getPropertyValue(name).trim())
   }, [name])
-  return <code style={{ color: 'var(--color-text-subtle)', fontSize: 'var(--font-size-xs)' }}>{value}</code>
-}
-
-export function Swatch({ name }: { name: string }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', padding: 'var(--space-2) 0' }}>
-      <div
-        style={{
-          width: 48,
-          height: 48,
-          borderRadius: 'var(--radius-md)',
-          background: `var(${name})`,
-          border: 'var(--border-width) solid var(--color-border)',
-        }}
-      />
-      <div style={{ display: 'grid' }}>
-        <code>{name}</code>
-        <TokenValue name={name} />
+    <div ref={ref} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', padding: 'var(--space-2) 0' }}>
+      <div style={{ width: 48, height: 48, background: `var(${name})`, border: 'var(--border-width) solid var(--color-border)' }} />
+      <div style={{ display: 'grid', gap: 2 }}>
+        <code style={{ ...label, textTransform: 'none', color: 'var(--color-text)' }}>{name}</code>
+        <code style={label}>{value}</code>
       </div>
     </div>
   )

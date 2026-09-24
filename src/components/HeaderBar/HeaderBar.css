@@ -1,0 +1,19 @@
+.above-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-margin-header) var(--space-margin-x);
+  font-family: var(--font-family-label);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--color-text-muted);
+}
+.above-header-bar__tab {
+  width: var(--size-tab-w);
+  height: var(--size-tab-h);
+  background: var(--color-text);
+  flex: none;
+}

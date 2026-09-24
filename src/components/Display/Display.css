@@ -1,0 +1,13 @@
+.above-display {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text);
+}
+.above-display--display { font-size: var(--font-size-display); }
+.above-display--hero { font-size: var(--font-size-hero); }
+.above-display--giant { font-size: var(--font-size-giant); }
+.above-display--mega { font-size: var(--font-size-mega); letter-spacing: var(--tracking-mega); }
+.above-display--muted { color: var(--color-text-muted); }

@@ -1,0 +1,11 @@
+/* ABOVE brand typefaces — licensed, self-hosted from /public/fonts (woff2).
+ * Only the weights the system uses are shipped. The full families
+ * (Thin→Black, Serif, Neue, Antique) live in the Claude Design export. */
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Regular_Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'KH Interference'; src: url('/fonts/KHInterference-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'KH Interference'; src: url('/fonts/KHInterference-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'KH Interference'; src: url('/fonts/KHInterference-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }

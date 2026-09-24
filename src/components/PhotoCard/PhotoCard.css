@@ -1,0 +1,13 @@
+/* The system's only ornament — and the only place radius, border and shadow appear. */
+.above-photo-card {
+  display: inline-block;
+  margin: 0;
+  border: var(--border-width-photo) solid var(--color-photo-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  background: var(--color-photo-border);
+  overflow: hidden;
+  line-height: 0;
+}
+.above-photo-card--tilted { transform: rotate(var(--rotate-card)); }
+.above-photo-card img { display: block; width: 100%; height: auto; }
