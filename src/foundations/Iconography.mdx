@@ -1,0 +1,18 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Logo } from '../components/Logo/Logo'
+
+<Meta title="Foundations/Iconography" />
+
+# Iconography
+
+ABOVE is almost icon-free — the system leans on type, scale and void instead of UI chrome.
+
+<div style={{ display: 'flex', gap: 24, margin: '24px 0' }}>
+  <div style={{ background: '#000', color: '#fff', padding: 32 }}><Logo size={120} /></div>
+  <div style={{ background: '#f9f9f9', color: '#000', padding: 32 }}><Logo size={120} /></div>
+</div>
+
+- **The mark — ā.** A lowercase grotesque *a* with a macron above it ("Above"). Single path, uses `currentColor` so it flips with the ground. Use the `Logo` component — never redraw it. Placement: bottom-right on the cover; sparing elsewhere.
+- **The header tab.** The 42×9 solid rectangle that opens the chapter bar — a wordless "you are here" tick.
+- **Typographic glyphs as illustration.** Single characters from the display face stand in for imagery, e.g. ✌ at 560px on the closing slide.
+- **No icon font or icon library.** If a derivative web UI needs functional icons, use a thin monoline set (Lucide, 1.5px stroke), strictly black/white — and flag it to the team, since the brand intentionally avoids icons.

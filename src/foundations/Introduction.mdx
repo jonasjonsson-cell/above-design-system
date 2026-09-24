@@ -22,10 +22,16 @@ one technical-mono header label, and enormous words that bleed off the edges.
 
 ## How it fits together
 
-- `src/styles/tokens.css` is the single source of truth. Primitives (`--above-*`) feed semantic
-  tokens (`--color-*`, `--font-*`, `--space-*`…). Components only read semantic tokens.
+- `src/styles/tokens.css` is the single source of truth. Brand tokens use the same names as the
+  Claude Design system (`--black`, `--fg1`, `--font-display`, `--type-hero`…) and feed theme-aware
+  semantic tokens (`--color-*`, `--font-size-*`, `--space-*`…) that the components read.
 - `data-theme="light"` switches to the inverted off-white cover ground.
 - The Figma library variables are generated from the same tokens.
 
-> The UI type scale, the 4px spacing scale and the component set beyond HeaderBar, PhotoCard,
-> Display and Logo are additions for interface work — they aren't in the source deck material.
+## What's here
+
+- **Foundations** — color & emphasis, typography (families, weights, poster ramp), spacing & radius, voice & content, iconography.
+- **Components** — HeaderBar, PhotoCard, Display, Label, Logo, and Button.
+- **Slides** — the "Visual Design Weekly" deck template: `Slide` plus Cover, Section, Agenda, Statement, Photo, Summary and Closing templates, and the full 10-slide sample deck.
+
+> Button, the UI type scale and the 4px spacing scale are additions for interface work — they aren't in the source deck material.

@@ -1,11 +1,35 @@
 /* ABOVE brand typefaces — licensed, self-hosted from /public/fonts (woff2).
- * Only the weights the system uses are shipped. The full families
- * (Thin→Black, Serif, Neue, Antique) live in the Claude Design export. */
+ * Same families and faces as the Claude Design system's tokens.json:
+ * Suisse BP Int'l (display, 100–900 + italics), Suisse BP Int'l Antique, KH Interference (label),
+ * Suisse BP Serif and Suisse BP Neue (opt-in companions). */
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Thin_Italic.woff2') format('woff2'); font-weight: 100; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_UltraLight.woff2') format('woff2'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_UltraLight_Italic.woff2') format('woff2'); font-weight: 200; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Light_Italic.woff2') format('woff2'); font-weight: 300; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Regular_Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Medium_Italic.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }
 @font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Bold_Italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Black_Italic.woff2') format('woff2'); font-weight: 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl Antique'; src: url('/fonts/Suisse_BP_Int_l_Antique.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Intl Antique'; src: url('/fonts/Suisse_BP_Int_l_Antique_Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: 'KH Interference'; src: url('/fonts/KHInterference-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
 @font-face { font-family: 'KH Interference'; src: url('/fonts/KHInterference-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'KH Interference'; src: url('/fonts/KHInterference-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Serif'; src: url('/fonts/Suisse_BP_Serif.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Serif'; src: url('/fonts/Suisse_BP_Serif_Regular_Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Serif'; src: url('/fonts/Suisse_BP_Serif_Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Serif'; src: url('/fonts/Suisse_BP_Serif_Medium_Italic.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Serif'; src: url('/fonts/Suisse_BP_Serif_Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Serif'; src: url('/fonts/Suisse_BP_Serif_Bold_Italic.woff2') format('woff2'); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Neue'; src: url('/fonts/Suisse_BP_Neue_Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Neue'; src: url('/fonts/Suisse_BP_Neue_Light_Italic.woff2') format('woff2'); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Neue'; src: url('/fonts/Suisse_BP_Neue_Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Neue'; src: url('/fonts/Suisse_BP_Neue_Regular_Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Suisse BP Neue'; src: url('/fonts/Suisse_BP_Neue_Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Suisse BP Neue'; src: url('/fonts/Suisse_BP_Neue_Medium_Italic.woff2') format('woff2'); font-weight: 500; font-style: italic; font-display: swap; }

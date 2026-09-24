@@ -1,60 +1,104 @@
 /*
  * ABOVE design tokens — THE single source of truth.
- * Source: "ABOVE Design System WiP" (Claude Design export, colors_and_type.css).
+ * Source: the ABOVE Design System in Claude Design (tokens.json / tokens.css).
  * Every component reads these custom properties; nothing is hardcoded.
  * The Figma library's variables are generated from this file.
  *
  * Two layers:
- *   1. Primitives (--above-*)  the brand's raw values — never used directly in components
- *   2. Semantic               what components consume
+ *   1. Brand tokens — same names as the Claude Design system (--black, --fg1, --type-hero, …),
+ *      so markup written against Claude Design works here unchanged.
+ *   2. Semantic tokens (--color-*, --font-size-*, --space-*, …) — theme-aware, what components read.
  *
- * Themes: dark (black ground) is the brand default. [data-theme="light"]
- * gives the inverted off-white "cover" ground.
+ * Themes: dark (black ground) is the brand default. [data-theme="light"] gives the
+ * inverted off-white "cover" ground.
  */
 :root {
-  /* ---------- Primitives: palette (the whole brand is three values) ---------- */
-  --above-black: #000000;
-  --above-white: #ffffff;
-  --above-offwhite: #f9f9f9;
+  /* =================== 1. Brand tokens (Claude Design names) =================== */
 
-  /* ---------- Primitives: type families ---------- */
-  --above-font-display: 'Suisse BP Intl', 'Helvetica Neue', Arial, sans-serif;
-  --above-font-label: 'KH Interference', ui-monospace, 'SFMono-Regular', monospace;
+  /* Palette — the whole brand lives in these three */
+  --black: #000000;
+  --white: #ffffff;
+  --offwhite: #f9f9f9;
 
-  /* ---------- Semantic: color (dark / default) ---------- */
-  --color-bg: var(--above-black);
-  --color-surface: var(--above-black);
-  --color-text: rgb(255 255 255 / 1);        /* fg1 — primary display */
-  --color-text-muted: rgb(255 255 255 / 0.5); /* fg2 — secondary, labels */
-  --color-text-subtle: rgb(255 255 255 / 0.3);/* fg3 — faint */
-  --color-border: rgb(255 255 255 / 0.3);
-  --color-border-strong: var(--above-white);
-  --color-accent: var(--above-white);         /* emphasis = full white; no brand hue */
-  --color-on-accent: var(--above-black);
-  --color-focus-ring: var(--above-white);
-  --color-photo-border: var(--above-white);
+  /* Surfaces & ink */
+  --bg-dark: var(--black);
+  --bg-light: var(--offwhite);
+  --fg-on-dark: var(--white);
+  --fg-on-light: var(--black);
 
-  /* ---------- Typography ---------- */
-  --font-family-display: var(--above-font-display);
-  --font-family-label: var(--above-font-label);
-  --font-family-base: var(--above-font-display);
+  /* Emphasis — opacity steps, the only way emphasis is built */
+  --fg1: rgba(255, 255, 255, 1);   /* headline */
+  --fg2: rgba(255, 255, 255, 0.5); /* label / to-do / secondary */
+  --fg3: rgba(255, 255, 255, 0.3); /* faint */
+  --ink1: rgba(0, 0, 0, 1);
+  --ink2: rgba(0, 0, 0, 0.5);
+  --ink3: rgba(0, 0, 0, 0.3);
+
+  /* Type families */
+  --font-display: 'Suisse BP Intl', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'KH Interference', ui-monospace, 'SFMono-Regular', monospace;
+  --font-serif: 'Suisse BP Serif', Georgia, 'Times New Roman', serif;
+  --font-neue: 'Suisse BP Neue', 'Suisse BP Serif', Georgia, serif; /* a serif (the Claude Design README calls it a grotesque) */
+  --font-antique: 'Suisse BP Intl Antique', 'Suisse BP Intl', sans-serif;
+
+  /* Type ramp — poster scale (display weight 400, line-height 0.8) */
+  --type-mega: 515px;      /* full-bleed numerals / one word, bottom-anchored */
+  --type-giant: 240px;     /* cover word */
+  --type-hero: 160px;      /* standard slide headline */
+  --type-statement: 96px;  /* multi-line statement */
+  --type-label: 12px;      /* mono header label */
+  --line-display: 0.8;
+  --tracking-cover: -0.04em;
+  --tracking-tight: -0.05em;
+  --tracking-tighter: -0.08em;
+  --tracking-label: 0.06em;
+
+  /* Layout (1920×1080 slide canvas) */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --margin-x: 18px;       /* hero text left inset */
+  --margin-header: 20px;  /* header bar inset */
+  --header-top: 9px;
+
+  /* Radius & shadow — photo card only */
+  --radius-card: 4px;
+  --shadow-card: 0px 2px 6px 0px rgba(0, 0, 0, 0.1), 0px 0px 2px 0px rgba(0, 0, 0, 0.08), 0px 0px 0px 1px rgba(0, 0, 0, 0.2);
+
+  /* =================== 2. Semantic tokens (dark / default) =================== */
+
+  --color-bg: var(--bg-dark);
+  --color-surface: var(--bg-dark);
+  --color-text: var(--fg1);
+  --color-text-muted: var(--fg2);
+  --color-text-subtle: var(--fg3);
+  --color-border: var(--fg3);
+  --color-border-strong: var(--white);
+  --color-accent: var(--white);      /* emphasis = full ink; no brand hue */
+  --color-on-accent: var(--black);
+  --color-focus-ring: var(--white);
+  --color-photo-border: var(--white);
+
+  --font-family-display: var(--font-display);
+  --font-family-label: var(--font-label);
+  --font-family-serif: var(--font-serif);
+  --font-family-neue: var(--font-neue);
+  --font-family-base: var(--font-display);
+  --font-weight-thin: 100;
+  --font-weight-ultralight: 200;
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
+  --font-weight-black: 900;
 
-  /* Display ramp (poster scale — the brand's own values) */
-  --font-size-mega: 515px;   /* bottom-bleed numeral / single word */
-  --font-size-giant: 240px;  /* cover word */
-  --font-size-hero: 160px;   /* standard headline */
-  --font-size-display: 96px; /* secondary statement */
-  --line-height-display: 0.8;
-  --tracking-display: -0.05em;
-  --tracking-mega: -0.08em;
-
-  /* Label (technical mono header) */
-  --font-size-label: 12px;
-  --tracking-label: 0.06em;
+  --font-size-mega: var(--type-mega);
+  --font-size-giant: var(--type-giant);
+  --font-size-hero: var(--type-hero);
+  --font-size-display: var(--type-statement);
+  --font-size-label: var(--type-label);
+  --line-height-display: var(--line-display);
+  --tracking-display: var(--tracking-tight);
+  --tracking-mega: var(--tracking-tighter);
 
   /* UI ramp — NOT in the source material; chosen for interface work */
   --font-size-xs: 0.75rem;
@@ -66,9 +110,8 @@
   --line-height-tight: 1.1;
   --line-height-base: 1.4;
 
-  /* ---------- Spacing ---------- */
-  --space-margin-x: 18px;      /* brand: hero text left inset */
-  --space-margin-header: 20px; /* brand: header bar inset */
+  --space-margin-x: var(--margin-x);
+  --space-margin-header: var(--margin-header);
   /* 4px UI scale — NOT in the source material */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -78,32 +121,27 @@
   --space-8: 2rem;
   --space-12: 3rem;
 
-  /* ---------- Shape / elevation ---------- */
   --radius-none: 0;            /* layout is hard-edged everywhere */
-  --radius-card: 4px;          /* photo card only */
   --border-width: 1px;
   --border-width-photo: 8px;
-  --shadow-card: 0 2px 6px 0 rgb(0 0 0 / 0.1), 0 0 2px 0 rgb(0 0 0 / 0.08), 0 0 0 1px rgb(0 0 0 / 0.2);
   --rotate-card: -9deg;
-
-  /* ---------- Header tab marker ---------- */
   --size-tab-w: 42px;
   --size-tab-h: 9px;
 
-  /* ---------- Motion: hard cuts, no easing ---------- */
+  /* Motion: hard cuts, no easing */
   --duration-instant: 0ms;
   --easing-none: linear;
 }
 
 [data-theme='light'] {
-  --color-bg: var(--above-offwhite);
-  --color-surface: var(--above-offwhite);
-  --color-text: rgb(0 0 0 / 1);
-  --color-text-muted: rgb(0 0 0 / 0.5);
-  --color-text-subtle: rgb(0 0 0 / 0.3);
-  --color-border: rgb(0 0 0 / 0.3);
-  --color-border-strong: var(--above-black);
-  --color-accent: var(--above-black);
-  --color-on-accent: var(--above-white);
-  --color-focus-ring: var(--above-black);
+  --color-bg: var(--bg-light);
+  --color-surface: var(--bg-light);
+  --color-text: var(--ink1);
+  --color-text-muted: var(--ink2);
+  --color-text-subtle: var(--ink3);
+  --color-border: var(--ink3);
+  --color-border-strong: var(--black);
+  --color-accent: var(--black);
+  --color-on-accent: var(--white);
+  --color-focus-ring: var(--black);
 }

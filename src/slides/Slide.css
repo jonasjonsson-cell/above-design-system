@@ -1,0 +1,77 @@
+/* 1920×1080 slide ground. Children are positioned absolutely, as in the deck template. */
+.above-slide {
+  position: relative;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 400;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.above-slide-frame { overflow: hidden; flex: none; }
+.above-slide-frame > .above-slide { transform-origin: top left; }
+
+/* Header chapter bar, as placed on slides */
+.above-slide .above-slide__header {
+  position: absolute;
+  left: var(--margin-header);
+  right: var(--margin-header);
+  top: 16px;
+  padding: 0;
+  font-size: 13px;
+}
+
+.above-slide__hero {
+  position: absolute;
+  left: var(--margin-x);
+  top: 150px;
+  right: var(--margin-x);
+  margin: 0;
+  font-size: var(--type-hero);
+  line-height: var(--line-display);
+  letter-spacing: var(--tracking-tight);
+  white-space: pre-line;
+}
+.above-slide__hero--below-kicker { top: 360px; }
+
+.above-slide__statement {
+  position: absolute;
+  left: var(--margin-x);
+  top: 150px;
+  width: 1820px;
+  margin: 0;
+}
+.above-slide__statement > span {
+  display: block;
+  font-size: var(--type-statement);
+  line-height: 0.84;
+  letter-spacing: var(--tracking-tight);
+}
+
+.above-slide__mega {
+  position: absolute;
+  left: 6px;
+  top: 640px;
+  font-size: 516px;
+  line-height: var(--line-display);
+  letter-spacing: var(--tracking-tighter);
+}
+
+.above-slide__summary { position: absolute; left: var(--margin-x); top: 150px; display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.above-slide__summary > * { font-size: var(--type-hero); line-height: var(--line-display); letter-spacing: var(--tracking-tight); color: var(--color-text-muted); }
+.above-slide__summary > :first-child { color: var(--color-text); margin-bottom: 24px; }
+
+.above-slide__cover-word { position: absolute; left: 111px; top: 100px; margin: 0; font-size: var(--type-giant); line-height: var(--line-display); letter-spacing: var(--tracking-cover); }
+.above-slide__cover-sub { position: absolute; left: 115px; top: 360px; font-family: var(--font-label); font-size: 16px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--color-text-muted); }
+.above-slide__cover-logo { position: absolute; right: 112px; bottom: 112px; display: block; }
+
+.above-slide__photo { position: absolute; right: 150px; top: 470px; }
+.above-slide__photo img { width: 100%; height: 446px; object-fit: cover; }
+
+.above-slide__glyph { position: absolute; right: 90px; top: 300px; font-size: 560px; line-height: var(--line-display); transform: rotate(6deg); }
+
+/* Headings inherit the display weight — the deck never uses bold. */
+.above-slide h1, .above-slide h2, .above-slide ul { font-weight: 400; }
+/* Render glyphs as type, not colour emoji. */
+.above-slide__glyph { font-variant-emoji: text; font-family: var(--font-display), 'Apple Symbols', 'Segoe UI Symbol', 'DejaVu Sans', sans-serif; }
