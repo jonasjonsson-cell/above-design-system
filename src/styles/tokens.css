@@ -15,10 +15,10 @@
   --secondary-violet: #7b52e0;
   --secondary-blue-sky: #8ab4f9;
   --secondary-coral: #ff6b6b;
-  --fg1: rgba(255, 255, 255, 1);
+  --fg1: #ffffff;
   --fg2: rgba(255, 255, 255, 0.5);
   --fg3: rgba(255, 255, 255, 0.3);
-  --ink1: rgba(0, 0, 0, 1);
+  --ink1: #000000;
   --ink2: rgba(0, 0, 0, 0.5);
   --ink3: rgba(0, 0, 0, 0.3);
 
