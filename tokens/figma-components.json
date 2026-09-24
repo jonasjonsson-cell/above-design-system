@@ -1,0 +1,92 @@
+{
+  "$description": "Map between React components and their Figma counterparts in the Above Design System Test library. Figma property names on the left, React props on the right. Used by Claude to keep structure in sync; Code Connect can be added from this later.",
+  "fileKey": "G9NJsMEulHxW0FhK4kPG4N",
+  "components": {
+    "Button": {
+      "figma": {
+        "nodeId": "14:181",
+        "key": "a2e55026a04f22f857ccdccd01dbfe259b635ba3"
+      },
+      "source": "src/components/Button/Button.tsx",
+      "props": {
+        "Label": "children",
+        "Variant": "variant (primary|secondary|ghost)",
+        "Size": "size (sm|md|lg)",
+        "State": "hover/disabled (Disabled → disabled)"
+      }
+    },
+    "Tag": {
+      "figma": {
+        "nodeId": "14:188",
+        "key": "fd72c6432cb1bd425491659c8879f36c8a7d9a70"
+      },
+      "source": "src/components/Tag/Tag.tsx",
+      "props": {
+        "Label": "children",
+        "Tone": "tone (grey|light|highlight)"
+      }
+    },
+    "ArrowButton": {
+      "figma": {
+        "nodeId": "14:201",
+        "key": "dc2b6fad13d824fd3d4cce59f1361d6938fc26f6"
+      },
+      "source": "src/components/ArrowButton/ArrowButton.tsx",
+      "props": {
+        "Size": "size (40|64)",
+        "State": "hover"
+      }
+    },
+    "HeaderBar": {
+      "figma": {
+        "nodeId": "14:204",
+        "key": "eac7068ff579c71b8d24f81b89f8dd8cfd3c1baf"
+      },
+      "source": "src/components/HeaderBar/HeaderBar.tsx",
+      "props": {
+        "Title": "title",
+        "Page": "page",
+        "Show page": "page !== undefined",
+        "Copyright": "copyright"
+      }
+    },
+    "Label": {
+      "figma": {
+        "nodeId": "14:202",
+        "key": "ecb96f774775b6eab74e5654f5f9b534d10c7a60"
+      },
+      "source": "src/components/Label/Label.tsx",
+      "props": {
+        "Text": "children"
+      }
+    },
+    "Logo": {
+      "figma": {
+        "nodeId": "14:209",
+        "key": "d3e9fa0007b956fe6cb2e696056955fc3d74713b"
+      },
+      "source": "src/components/Logo/Logo.tsx",
+      "props": {}
+    },
+    "Dash": {
+      "figma": {
+        "nodeId": "14:214",
+        "key": "90d5d9cff78b2547b9a656cfe8e31e950a838e77"
+      },
+      "source": "src/components/Dash/Dash.tsx",
+      "props": {
+        "Fill": "fill (Ink → default, Highlight → var(--primary-green-01))"
+      }
+    },
+    "PhotoCard": {
+      "figma": {
+        "nodeId": "14:221",
+        "key": "9b7af5ebed9a544058bf615d038654c5176728e2"
+      },
+      "source": "src/components/PhotoCard/PhotoCard.tsx",
+      "props": {
+        "Tilted": "tilted"
+      }
+    }
+  }
+}

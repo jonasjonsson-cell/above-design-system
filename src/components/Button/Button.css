@@ -6,15 +6,12 @@
   gap: var(--space-2);
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-none);
-  font: inherit;
-  font-family: var(--font-family-display);
-  font-weight: var(--font-weight-regular);
   cursor: pointer;
   transition: none;
 }
-.above-button--sm { padding: var(--space-1) var(--space-3); font-size: var(--font-size-sm); }
-.above-button--md { padding: var(--space-2) var(--space-4); font-size: var(--font-size-md); }
-.above-button--lg { padding: var(--space-3) var(--space-6); font-size: var(--font-size-lg); }
+.above-button--sm { padding: var(--space-1) var(--space-3); font: var(--text-body-s); }
+.above-button--md { padding: var(--space-2) var(--space-4); font: var(--text-body-m); }
+.above-button--lg { padding: var(--space-3) var(--space-6); font: var(--text-body-l); }
 
 .above-button--primary { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
 .above-button--primary:hover:not(:disabled) { background: transparent; color: var(--color-accent); }

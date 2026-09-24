@@ -29,8 +29,18 @@ repository secret). Pull requests get a preview build plus visual diffs.
 
 ## Keeping Figma in sync
 
-The Figma library's variables are generated from `tokens.css`. When tokens
-change, re-sync the Figma variables in the same piece of work so the two never drift.
+Figma library: **Above Design System Test library** (fileKey `G9NJsMEulHxW0FhK4kPG4N`).
+
+- `tokens/tokens.json` is the single source. `npm run tokens` generates `src/styles/tokens.css` and
+  `text-styles.css`; CI (`npm run tokens:check`) fails if they're edited by hand.
+- The JSON groups map 1:1 to Figma: `primitive` → Primitives, `color` → Color (Dark/Light),
+  `dimension` → Spacing, `textStyles` → text styles, `effects` → effect styles.
+  Each Figma variable's Web code syntax `var(--name)` is the join key — don't rename it on one side only.
+- **Figma → code:** run `scripts/figma/export-tokens.js` through `use_figma`, save the JSON, then
+  `node scripts/figma-to-tokens.mjs export.json && npm run tokens`. Commit → Chromatic publishes.
+- **Code → Figma:** see `scripts/figma/push-tokens.md`.
+- `tokens/figma-components.json` maps each React component to its Figma component set (node id, key,
+  property ↔ prop mapping). Structural changes are made on both sides.
 
 ## Brand
 
