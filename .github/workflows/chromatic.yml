@@ -1,6 +1,7 @@
-# Move this file to .github/workflows/chromatic.yml
-# (Claude can't write inside .github/ from a remote session.)
-name: Publish Storybook (Chromatic)
+# One-time replacement for .github/workflows/chromatic.yml.
+# Deliberately thin: every build/publish step lives in package.json ("ci" script)
+# and chromatic.config.json, so future CI changes never need to touch .github/.
+name: CI
 
 on:
   push:
@@ -8,7 +9,7 @@ on:
   pull_request:
 
 jobs:
-  chromatic:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,11 +20,6 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run typecheck
-      - name: Publish to Chromatic
-        uses: chromaui/action@latest
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          buildScriptName: build-storybook
-          exitZeroOnChanges: true
-          autoAcceptChanges: main
+      - run: npm run ci
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
