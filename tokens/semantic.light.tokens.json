@@ -1,0 +1,51 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "semantic": {
+    "color": {
+      "$type": "color",
+      "$description": "Semantic colour, light mode. Figma: Color collection, Light mode. CSS: --color-<name>.",
+      "bg": {
+        "$value": "{primitive.offwhite}"
+      },
+      "surface": {
+        "$value": "{primitive.offwhite}"
+      },
+      "surface-raised": {
+        "$value": "{primitive.white}"
+      },
+      "text": {
+        "$value": "{primitive.ink1}"
+      },
+      "text-muted": {
+        "$value": "{primitive.ink2}"
+      },
+      "text-subtle": {
+        "$value": "{primitive.ink3}"
+      },
+      "border": {
+        "$value": "{primitive.ink3}"
+      },
+      "border-strong": {
+        "$value": "{primitive.black}"
+      },
+      "accent": {
+        "$value": "{primitive.black}"
+      },
+      "on-accent": {
+        "$value": "{primitive.white}"
+      },
+      "focus-ring": {
+        "$value": "{primitive.black}"
+      },
+      "photo-border": {
+        "$value": "{primitive.white}"
+      },
+      "highlight": {
+        "$value": "{primitive.primary-green-01}"
+      },
+      "on-highlight": {
+        "$value": "{primitive.primary-green-03}"
+      }
+    }
+  }
+}

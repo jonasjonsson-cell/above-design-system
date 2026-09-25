@@ -1,0 +1,55 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/resolver.json",
+  "version": "2025.10",
+  "description": "Above design tokens. Base set plus a theme modifier (dark is the default ground).",
+  "sets": {
+    "base": {
+      "sources": [
+        {
+          "$ref": "primitive.tokens.json"
+        },
+        {
+          "$ref": "semantic.tokens.json"
+        },
+        {
+          "$ref": "dimension.tokens.json"
+        },
+        {
+          "$ref": "typography.tokens.json"
+        },
+        {
+          "$ref": "effect.tokens.json"
+        },
+        {
+          "$ref": "component.tokens.json"
+        }
+      ]
+    }
+  },
+  "modifiers": {
+    "theme": {
+      "description": "Colour mode. Figma: Color collection modes.",
+      "contexts": {
+        "dark": [
+          {
+            "$ref": "semantic.dark.tokens.json"
+          }
+        ],
+        "light": [
+          {
+            "$ref": "semantic.light.tokens.json"
+          }
+        ]
+      },
+      "default": "dark"
+    }
+  },
+  "resolutionOrder": [
+    {
+      "$ref": "#/sets/base"
+    },
+    {
+      "$ref": "#/modifiers/theme"
+    }
+  ]
+}

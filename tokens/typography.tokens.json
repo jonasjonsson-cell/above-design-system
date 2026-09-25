@@ -1,0 +1,658 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "typography": {
+    "$description": "Font families, weights, line heights, tracking and text styles. Text styles → Figma text styles (name in $extensions); the rest is code-only.",
+    "font": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": [
+          "Suisse BP Intl",
+          "Helvetica Neue",
+          "Arial",
+          "sans-serif"
+        ],
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "label": {
+        "$value": [
+          "KH Interference",
+          "ui-monospace",
+          "SFMono-Regular",
+          "monospace"
+        ],
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "serif": {
+        "$value": [
+          "Suisse BP Serif",
+          "Georgia",
+          "Times New Roman",
+          "serif"
+        ],
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "neue": {
+        "$value": [
+          "Suisse BP Neue",
+          "Suisse BP Serif",
+          "Georgia",
+          "serif"
+        ],
+        "$description": "A serif, despite the deck README.",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "antique": {
+        "$value": [
+          "Suisse BP Intl Antique",
+          "Suisse BP Intl",
+          "sans-serif"
+        ],
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "font-family": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": "{typography.font.display}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "label": {
+        "$value": "{typography.font.label}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "serif": {
+        "$value": "{typography.font.serif}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "neue": {
+        "$value": "{typography.font.neue}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "base": {
+        "$value": "{typography.font.display}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "font-weight": {
+      "$type": "fontWeight",
+      "thin": {
+        "$value": 100,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "ultralight": {
+        "$value": 200,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "light": {
+        "$value": 300,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "regular": {
+        "$value": 400,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "medium": {
+        "$value": 500,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "bold": {
+        "$value": 700,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "black": {
+        "$value": 900,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "line": {
+      "display": {
+        "$type": "number",
+        "$value": 0.8,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "display": {
+        "$value": "{typography.line.display}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "tight": {
+        "$value": 1.1,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "base": {
+        "$value": 1.4,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "tracking": {
+      "$description": "Relative letter-spacing, emitted in em (DTCG has no em unit, so these are numbers with cssUnit em).",
+      "cover": {
+        "$type": "number",
+        "$value": -0.04,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "em"
+          }
+        }
+      },
+      "tight": {
+        "$type": "number",
+        "$value": -0.05,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "em"
+          }
+        }
+      },
+      "tighter": {
+        "$type": "number",
+        "$value": -0.08,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "em"
+          }
+        }
+      },
+      "label": {
+        "$type": "number",
+        "$value": 0.06,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "em"
+          }
+        }
+      },
+      "label-text": {
+        "$type": "number",
+        "$value": 0.06,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "em"
+          }
+        }
+      },
+      "display": {
+        "$type": "number",
+        "$value": "{typography.tracking.tight}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "em"
+          }
+        }
+      },
+      "mega": {
+        "$type": "number",
+        "$value": "{typography.tracking.tighter}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "em"
+          }
+        }
+      }
+    },
+    "text": {
+      "$type": "typography",
+      "$description": "Text styles. CSS: --text-<name> (font shorthand), --tracking-<name>, class .text-<name>. letterSpacing is px (DTCG); CSS emits it as em.",
+      "display-l": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 220,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 0.75,
+          "letterSpacing": {
+            "value": -13.2,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Display/Display L"
+          }
+        }
+      },
+      "display-s": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 180,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 0.8,
+          "letterSpacing": {
+            "value": -7.2,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Display/Display S"
+          }
+        }
+      },
+      "heading-xl": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 120,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 0.85,
+          "letterSpacing": {
+            "value": -4.8,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Heading/Heading XL"
+          }
+        }
+      },
+      "heading-l": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 100,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 0.85,
+          "letterSpacing": {
+            "value": -4,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Heading/Heading L"
+          }
+        }
+      },
+      "heading-m": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 80,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 0.85,
+          "letterSpacing": {
+            "value": -1.6,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Heading/Heading M"
+          }
+        }
+      },
+      "heading-s": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 60,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 0.9,
+          "letterSpacing": {
+            "value": -1.2,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Heading/Heading S"
+          }
+        }
+      },
+      "heading-xs": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 48,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 0.9,
+          "letterSpacing": {
+            "value": -0.48,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Heading/Heading XS"
+          }
+        }
+      },
+      "body-xl": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 32,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 1,
+          "letterSpacing": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Body/Body XL"
+          }
+        }
+      },
+      "body-l": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 24,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 1,
+          "letterSpacing": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Body/Body L"
+          }
+        }
+      },
+      "body-m": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 20,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 1,
+          "letterSpacing": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Body/Body M"
+          }
+        }
+      },
+      "body-s": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 16,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 1,
+          "letterSpacing": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Body/Body S"
+          }
+        }
+      },
+      "list-l": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 20,
+            "unit": "px"
+          },
+          "fontWeight": 300,
+          "lineHeight": 1.3,
+          "letterSpacing": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "List/List L"
+          }
+        }
+      },
+      "list-s": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": {
+            "value": 16,
+            "unit": "px"
+          },
+          "fontWeight": 300,
+          "lineHeight": 1.3,
+          "letterSpacing": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "List/List S"
+          }
+        }
+      },
+      "label-l": {
+        "$value": {
+          "fontFamily": "{typography.font.label}",
+          "fontSize": {
+            "value": 16,
+            "unit": "px"
+          },
+          "fontWeight": 400,
+          "lineHeight": 1.2,
+          "letterSpacing": {
+            "value": 0.96,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Label/Label L",
+            "textCase": "uppercase"
+          }
+        }
+      },
+      "label-s": {
+        "$value": {
+          "fontFamily": "{typography.font.label}",
+          "fontSize": "{dimension.type.label}",
+          "fontWeight": 400,
+          "lineHeight": 1.2,
+          "letterSpacing": {
+            "value": 0.72,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Label/Label S",
+            "textCase": "uppercase"
+          }
+        }
+      },
+      "deck-mega": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": "{dimension.type.mega}",
+          "fontWeight": 400,
+          "lineHeight": 0.8,
+          "letterSpacing": {
+            "value": -41.2,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Deck/Mega"
+          }
+        }
+      },
+      "deck-giant": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": "{dimension.type.giant}",
+          "fontWeight": 400,
+          "lineHeight": 0.8,
+          "letterSpacing": {
+            "value": -9.6,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Deck/Giant"
+          }
+        }
+      },
+      "deck-hero": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": "{dimension.type.hero}",
+          "fontWeight": 400,
+          "lineHeight": 0.8,
+          "letterSpacing": {
+            "value": -8,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Deck/Hero"
+          }
+        }
+      },
+      "deck-statement": {
+        "$value": {
+          "fontFamily": "{typography.font.display}",
+          "fontSize": "{dimension.type.statement}",
+          "fontWeight": 400,
+          "lineHeight": 0.84,
+          "letterSpacing": {
+            "value": -4.8,
+            "unit": "px"
+          }
+        },
+        "$extensions": {
+          "se.above": {
+            "figma": "Deck/Statement"
+          }
+        }
+      }
+    }
+  }
+}

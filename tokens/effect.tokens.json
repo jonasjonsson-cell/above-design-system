@@ -1,0 +1,146 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "effect": {
+    "shadow": {
+      "$type": "shadow",
+      "card": {
+        "$value": [
+          {
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "hex": "#000000",
+              "alpha": 0.1
+            },
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 2,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 6,
+              "unit": "px"
+            },
+            "spread": {
+              "value": 0,
+              "unit": "px"
+            }
+          },
+          {
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "hex": "#000000",
+              "alpha": 0.08
+            },
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 0,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 2,
+              "unit": "px"
+            },
+            "spread": {
+              "value": 0,
+              "unit": "px"
+            }
+          },
+          {
+            "color": {
+              "colorSpace": "srgb",
+              "components": [
+                0,
+                0,
+                0
+              ],
+              "hex": "#000000",
+              "alpha": 0.2
+            },
+            "offsetX": {
+              "value": 0,
+              "unit": "px"
+            },
+            "offsetY": {
+              "value": 0,
+              "unit": "px"
+            },
+            "blur": {
+              "value": 0,
+              "unit": "px"
+            },
+            "spread": {
+              "value": 1,
+              "unit": "px"
+            }
+          }
+        ],
+        "$extensions": {
+          "se.above": {
+            "figma": "Shadow/Card"
+          }
+        }
+      }
+    },
+    "rotate": {
+      "card": {
+        "$type": "number",
+        "$value": -9,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "deg"
+          }
+        }
+      }
+    }
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "instant": {
+        "$value": {
+          "value": 0,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "none": {
+        "$value": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "$description": "Linear — interactions are instant.",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    }
+  }
+}

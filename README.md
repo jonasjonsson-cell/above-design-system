@@ -12,12 +12,12 @@ npm run storybook   # http://localhost:6006
 
 ## How it's organised
 
-- `tokens/tokens.json` — **single source of truth** for colour, type, spacing, grids,
-  component tokens and effects. `npm run tokens` generates `src/styles/tokens.css`,
-  `src/styles/text-styles.css` and `tokens/tokens.md`. Three tiers: primitives
-  (`--black`, `--primary-green-01`) → semantic (`--color-*`, `--space-*`) →
-  component (`--button-*`, `--slide-*`). Components read semantic or component
-  tokens — never hardcode a value.
+- `tokens/` — **single source of truth**, in the W3C Design Tokens (DTCG 2025.10) format.
+  `above.resolver.json` is the entry point: a base set (`primitive`, `semantic`, `dimension`, `typography`,
+  `effect`, `component` `.tokens.json`) plus a theme modifier (`semantic.dark` / `semantic.light`).
+  `npm run tokens` generates `src/styles/tokens.css`, `src/styles/text-styles.css` and `tokens/tokens.md`.
+  Three tiers: primitives (`--black`) → semantic (`--color-*`, `--space-*`) → component (`--button-*`, `--slide-*`).
+  Components read semantic or component tokens — never hardcode a value.
 - `src/foundations/` — Storybook pages documenting the tokens.
 - `src/components/<Name>/` — one folder per component: `Name.tsx`, `Name.css`,
   `Name.stories.tsx`.
@@ -33,15 +33,16 @@ repository secret). Pull requests get a preview build plus visual diffs.
 
 Figma library: **Above Design System Test library** (fileKey `G9NJsMEulHxW0FhK4kPG4N`).
 
-- `tokens/tokens.json` is the single source. `npm run tokens` generates `src/styles/tokens.css` and
-  `text-styles.css`; CI (`npm run tokens:check`) fails if they're edited by hand.
-- The JSON groups map 1:1 to Figma: `primitive` → Primitives, `color` → Color (Dark/Light),
-  `dimension` and `grid` → Spacing (plus grid styles Grid/Slide, Grid/Page), `component` → Component,
-  `textStyles` → text styles, `effects` → effect styles. `tokens/tokens.md` is a generated, readable list of every token.
-  Each Figma variable's Web code syntax `var(--name)` is the join key — don't rename it on one side only.
+- `tokens/*.tokens.json` (DTCG) is the single source. `npm run tokens` generates the CSS and `tokens/tokens.md`;
+  CI (`npm run tokens:check`) fails if they're edited by hand.
+- CSS name = DTCG path minus its first segment, joined with `-` (`semantic.color.text` → `--color-text`). The same
+  string is each Figma variable's Web code syntax — the join key. Don't rename it on one side only.
+  Mapping: `primitive` → Primitives, `semantic.color` → Color (Dark/Light), `dimension` → Spacing (+ grid styles),
+  `component` → Component, `typography.text` → text styles, `effect.shadow` → effect styles.
+  Tokens marked `$extensions['se.above'].codeOnly` stay in code.
 - **Figma → code:** run `scripts/figma/export-tokens.js` through `use_figma`, save the JSON, then
-  `node scripts/figma-to-tokens.mjs export.json && npm run tokens`. Commit → Chromatic publishes.
-- **Code → Figma:** see `scripts/figma/push-tokens.md`.
+  `node scripts/figma-to-tokens.mjs export.json && npm run tokens` (add `--dry-run` to preview). Commit → Chromatic publishes.
+- **Code → Figma:** see `scripts/figma/push-tokens.md`. Only after Jonas approves the listed changes.
 - `tokens/figma-components.json` maps each React component to its Figma component set (node id, key,
   property ↔ prop mapping). Structural changes are made on both sides.
 
@@ -50,5 +51,5 @@ Figma library: **Above Design System Test library** (fileKey `G9NJsMEulHxW0FhK4k
 Monochrome, Swiss/International style: black `#000`, white `#fff`, off-white
 `#f9f9f9`; Suisse BP Int'l (display) + KH Interference (mono label); hard edges,
 the tilted photo card as the only ornament. Values come from the "ABOVE Design
-System WiP" export from Claude Design. The brand fonts are licensed — keep this
-repo and the published Storybook access-restricted.
+System WiP" export from Claude Design. The brand fonts are licensed to Above and
+may be used by everyone at Above; don't share the font files outside the company.

@@ -1,5 +1,5 @@
 /* ABOVE brand typefaces — licensed, self-hosted from /public/fonts (woff2).
- * Same families and faces as the Claude Design system's tokens.json:
+ * Same families and faces as the Claude Design system export:
  * Suisse BP Int'l (display, 100–900 + italics), Suisse BP Int'l Antique, KH Interference (label),
  * Suisse BP Serif and Suisse BP Neue (opt-in companions). */
 @font-face { font-family: 'Suisse BP Intl'; src: url('/fonts/Suisse_BP_Int_l_Thin.woff2') format('woff2'); font-weight: 100; font-style: normal; font-display: swap; }

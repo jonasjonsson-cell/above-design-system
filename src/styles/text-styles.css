@@ -1,4 +1,4 @@
-/* GENERATED from tokens/tokens.json by scripts/build-tokens.mjs — do not edit by hand. */
+/* GENERATED from tokens/*.tokens.json by scripts/build-tokens.mjs — do not edit by hand. */
 /* One class per text style. Use these instead of literal sizes. */
 .text-display-l { font: var(--text-display-l); letter-spacing: var(--tracking-display-l); margin: 0; }
 .text-display-s { font: var(--text-display-s); letter-spacing: var(--tracking-display-s); margin: 0; }

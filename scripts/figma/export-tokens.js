@@ -1,53 +1,38 @@
-// Figma → code. Paste into a `use_figma` call against the Test library (fileKey G9NJsMEulHxW0FhK4kPG4N).
-// Returns JSON in the tokens.json shape. Save it and run:
-//   node scripts/figma-to-tokens.mjs <export.json>   (merges into tokens/tokens.json)
-//   npm run tokens                                   (regenerates the CSS)
+// Figma → code, step 1 (read-only). Paste into a `use_figma` call against the Test library
+// (fileKey G9NJsMEulHxW0FhK4kPG4N). It reads variables, text styles and effect styles and returns
+// them keyed by CSS name (each variable's WEB code syntax is the join key). Save the result, then:
+//   node scripts/figma-to-tokens.mjs figma-export.json   (merges into tokens/*.tokens.json, prints every change)
+//   npm run tokens                                       (regenerates the CSS and tokens.md)
 const cols = await figma.variables.getLocalVariableCollectionsAsync();
 const vars = await figma.variables.getLocalVariablesAsync();
 const byId = Object.fromEntries(vars.map((v) => [v.id, v]));
 const css = (v) => (v.codeSyntax.WEB || '').replace(/^var\(--|\)$/g, '');
-const hex = (c) => {
-  const h = (n) => Math.round(n * 255).toString(16).padStart(2, '0');
-  return c.a === undefined || c.a === 1 ? `#${h(c.r)}${h(c.g)}${h(c.b)}` : `rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${+c.a.toFixed(3)})`;
-};
-const col = (n) => cols.find((c) => c.name === n);
-const out = { primitive: {}, color: {}, dimension: {}, grid: {}, component: {}, textStyles: {}, effects: {} };
-const P = col('Primitives'), C = col('Color'), S = col('Spacing'), K = col('Component');
+const val = (x) => (x && x.type === 'VARIABLE_ALIAS' ? { alias: css(byId[x.id]) } : x);
+const out = { format: 'above-figma-export/2', variables: [], textStyles: [], effects: [] };
 for (const v of vars) {
-  if (v.variableCollectionId === P.id) out.primitive[css(v)] = hex(v.valuesByMode[P.modes[0].modeId]);
-  if (v.variableCollectionId === S.id) (css(v).startsWith('grid-') ? out.grid : out.dimension)[css(v)] = v.valuesByMode[S.modes[0].modeId];
-  if (K && v.variableCollectionId === K.id) {
-    const val = v.valuesByMode[K.modes[0].modeId];
-    out.component[css(v)] = val.type === 'VARIABLE_ALIAS' ? `{${css(byId[val.id])}}` : val;
-  }
-  if (v.variableCollectionId === C.id) {
-    const m = {};
-    for (const mode of C.modes) {
-      const val = v.valuesByMode[mode.modeId];
-      m[mode.name.toLowerCase()] = val.type === 'VARIABLE_ALIAS' ? css(byId[val.id]) : hex(val);
-    }
-    out.color[css(v)] = m;
-  }
+  const c = cols.find((k) => k.id === v.variableCollectionId);
+  if (!c || !css(v)) continue;
+  out.variables.push({
+    css: css(v), name: v.name, collection: c.name, type: v.resolvedType,
+    values: Object.fromEntries(c.modes.map((m) => [m.name.toLowerCase(), val(v.valuesByMode[m.modeId])])),
+  });
 }
 for (const s of await figma.getLocalTextStylesAsync()) {
   const key = (s.description.match(/\.text-([\w-]+)/) || [])[1];
   if (!key) continue;
-  out.textStyles[key] = {
-    figma: s.name,
-    family: s.fontName.family === 'KH Interference' ? 'label' : 'display',
-    weight: s.fontName.style === 'Light' ? 300 : 400,
-    size: s.fontSize,
-    lineHeight: s.lineHeight.unit === 'PERCENT' ? +(s.lineHeight.value / 100).toFixed(3) : 1,
-    tracking: s.letterSpacing.unit === 'PERCENT' ? +(s.letterSpacing.value / 100).toFixed(3) : 0,
-    ...(s.textCase === 'UPPER' ? { uppercase: true } : {}),
-  };
+  out.textStyles.push({
+    css: key, name: s.name, family: s.fontName.family, style: s.fontName.style, size: s.fontSize,
+    lineHeight: s.lineHeight.unit === 'PERCENT' ? +(s.lineHeight.value / 100).toFixed(4) : null,
+    tracking: s.letterSpacing.unit === 'PERCENT' ? +(s.letterSpacing.value / 100).toFixed(4) : 0,
+    textCase: s.textCase,
+  });
 }
 for (const e of await figma.getLocalEffectStylesAsync()) {
   const key = (e.description.match(/var\(--([\w-]+)\)/) || [])[1];
   if (!key) continue;
-  out.effects[key] = {
-    figma: e.name,
-    layers: e.effects.filter((x) => x.type === 'DROP_SHADOW').map((x) => ({ x: x.offset.x, y: x.offset.y, blur: x.radius, spread: x.spread || 0, color: hex(x.color) })),
-  };
+  out.effects.push({
+    css: key, name: e.name,
+    layers: e.effects.filter((x) => x.type === 'DROP_SHADOW').map((x) => ({ x: x.offset.x, y: x.offset.y, blur: x.radius, spread: x.spread || 0, color: x.color })),
+  });
 }
 return out;

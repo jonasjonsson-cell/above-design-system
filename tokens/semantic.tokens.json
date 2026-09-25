@@ -1,0 +1,42 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "semantic": {
+    "$description": "Mode-independent colour aliases. CSS: --<name>.",
+    "bg-dark": {
+      "$type": "color",
+      "$value": "{primitive.black}",
+      "$extensions": {
+        "se.above": {
+          "codeOnly": true
+        }
+      }
+    },
+    "bg-light": {
+      "$type": "color",
+      "$value": "{primitive.offwhite}",
+      "$extensions": {
+        "se.above": {
+          "codeOnly": true
+        }
+      }
+    },
+    "fg-on-dark": {
+      "$type": "color",
+      "$value": "{primitive.white}",
+      "$extensions": {
+        "se.above": {
+          "codeOnly": true
+        }
+      }
+    },
+    "fg-on-light": {
+      "$type": "color",
+      "$value": "{primitive.black}",
+      "$extensions": {
+        "se.above": {
+          "codeOnly": true
+        }
+      }
+    }
+  }
+}

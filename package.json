@@ -1,7 +1,7 @@
 {
   "name": "above-design-system",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "UNLICENSED",
   "type": "module",
   "description": "Above design system — React + TypeScript component library documented in Storybook, with a companion Figma library.",

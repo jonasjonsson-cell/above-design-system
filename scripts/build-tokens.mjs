@@ -1,130 +1,134 @@
 #!/usr/bin/env node
-// Generates src/styles/tokens.css, src/styles/text-styles.css and tokens/tokens.md from tokens/tokens.json.
+// Builds CSS and docs from the DTCG (Design Tokens Format Module 2025.10) token files in tokens/.
+//   tokens/above.resolver.json  → which files make up the base set and the dark/light theme contexts
+//   src/styles/tokens.css       → every token as a CSS custom property (+ [data-theme='light'] overrides)
+//   src/styles/text-styles.css  → one .text-<name> class per typography token
+//   tokens/tokens.md            → readable reference for people and Claude
 // Usage: node scripts/build-tokens.mjs          (write)
-//        node scripts/build-tokens.mjs --check  (fail if the CSS is out of date — used in CI)
+//        node scripts/build-tokens.mjs --check  (fail if generated files are out of date — used in CI)
+//
+// Naming rule: CSS name = token path without its first (tier) segment, joined with "-".
+//   primitive.black → --black · semantic.color.text-muted → --color-text-muted · component.button.gap → --button-gap
+// That CSS name is also each Figma variable's WEB code syntax, i.e. the join key with Figma.
 import { readFileSync, writeFileSync } from 'node:fs'
+import { loadTokens, cssName } from './tokens-lib.mjs'
 
 const root = new URL('..', import.meta.url)
-const t = JSON.parse(readFileSync(new URL('tokens/tokens.json', root), 'utf8'))
-const HEADER = '/* GENERATED from tokens/tokens.json by scripts/build-tokens.mjs — do not edit by hand. */\n'
-const rem = (px) => (px === 0 ? '0' : `${+(px / 16).toFixed(4)}rem`)
-const px = (n) => (n === 0 ? '0' : `${n}px`)
-const em = (n) => (n === 0 ? '0' : `${n}em`)
-const entries = (o) => Object.entries(o || {}).filter(([k]) => !k.startsWith('$'))
-// Component values: number → px, "{name}" → var(--name), other strings → raw CSS (code-only).
-const compVal = (v) => (typeof v === 'number' ? px(v) : /^\{[\w-]+\}$/.test(v) ? `var(--${v.slice(1, -1)})` : v)
-const family = { display: 'var(--font-display)', label: 'var(--font-label)' }
+const { tokens, themes, byPath } = loadTokens(new URL('tokens/', root))
+const HEADER = '/* GENERATED from tokens/*.tokens.json by scripts/build-tokens.mjs — do not edit by hand. */\n'
 
-const lines = []
-const L = (s = '') => lines.push(s)
-L(HEADER + ':root {')
-L('  /* ---------- Primitives (Figma: Primitives) ---------- */')
-for (const [k, v] of Object.entries(t.primitive)) L(`  --${k}: ${v};`)
-L('')
-for (const [k, v] of Object.entries(t.alias)) L(`  --${k}: var(--${v});`)
-L(`
-  /* ---------- Type families & deck ramp (code-only) ---------- */
-  --font-display: 'Suisse BP Intl', 'Helvetica Neue', Arial, sans-serif;
-  --font-label: 'KH Interference', ui-monospace, 'SFMono-Regular', monospace;
-  --font-serif: 'Suisse BP Serif', Georgia, 'Times New Roman', serif;
-  --font-neue: 'Suisse BP Neue', 'Suisse BP Serif', Georgia, serif; /* a serif, despite the deck README */
-  --font-antique: 'Suisse BP Intl Antique', 'Suisse BP Intl', sans-serif;
-  --type-mega: ${t.textStyles['deck-mega'].size}px;
-  --type-giant: ${t.textStyles['deck-giant'].size}px;
-  --type-hero: ${t.textStyles['deck-hero'].size}px;
-  --type-statement: ${t.textStyles['deck-statement'].size}px;
-  --type-label: ${t.textStyles['label-s'].size}px;
-  --line-display: 0.8;
-  --tracking-cover: -0.04em;
-  --tracking-tight: -0.05em;
-  --tracking-tighter: -0.08em;
-  --tracking-label: 0.06em;
-  --slide-w: 1920px;
-  --slide-h: 1080px;`)
-L('')
-L('  /* ---------- Text styles (Figma: text styles) ---------- */')
-for (const [k, s] of Object.entries(t.textStyles)) {
-  L(`  --text-${k}: ${s.weight} ${s.size}px/${s.lineHeight} ${family[s.family]};`)
-  L(`  --tracking-${k}: ${em(s.tracking)};`)
+// ---------- value → CSS ----------
+const num = (n) => +(+n).toFixed(4)
+const GENERIC = new Set(['serif', 'sans-serif', 'monospace', 'ui-monospace', 'cursive', 'fantasy', 'system-ui'])
+const isAlias = (v) => typeof v === 'string' && /^\{[^}]+\}$/.test(v)
+const aliasPath = (v) => v.slice(1, -1)
+const ref = (v) => {
+  const target = byPath.get(aliasPath(v))
+  if (!target) throw new Error(`Unknown alias ${v}`)
+  return `var(--${cssName(target.path)})`
 }
-L('  --tracking-label-text: 0.06em;')
-L('')
-L('  /* ---------- Dimensions (Figma: Spacing) ---------- */')
-for (const [k, v] of Object.entries(t.dimension)) L(`  --${k}: ${k.startsWith('space-') ? rem(v) : px(v)};`)
-L('  --space-margin-x: var(--margin-x);')
-L('  --space-margin-header: var(--margin-header);')
-L('')
-L('  /* ---------- Layout grids (Figma: Spacing grid/… + grid styles) ---------- */')
-for (const [k, v] of entries(t.grid)) L(`  --${k}: ${/-(columns|rows)$/.test(k) ? v : px(v)};`)
-L('')
-L('  /* ---------- Component tokens (Figma: Component) ---------- */')
-for (const [k, v] of entries(t.component)) L(`  --${k}: ${compVal(v)};`)
-L('')
-L('  /* ---------- Effects (Figma: effect styles) ---------- */')
-for (const [k, e] of Object.entries(t.effects)) L(`  --${k}: ${e.layers.map((l) => `${px(l.x)} ${px(l.y)} ${px(l.blur)} ${px(l.spread)} ${l.color}`).join(', ')};`)
-L('  --rotate-card: -9deg;')
-L('')
-L('  /* ---------- Semantic colour (Figma: Color — Dark mode) ---------- */')
-for (const [k, m] of Object.entries(t.color)) L(`  --${k}: var(--${m.dark});`)
-L(`
-  /* ---------- Semantic type & UI scale (code-only) ---------- */
-  --font-family-display: var(--font-display);
-  --font-family-label: var(--font-label);
-  --font-family-serif: var(--font-serif);
-  --font-family-neue: var(--font-neue);
-  --font-family-base: var(--font-display);
-  --font-weight-thin: 100;
-  --font-weight-ultralight: 200;
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
-  --font-weight-black: 900;
-  --font-size-mega: var(--type-mega);
-  --font-size-giant: var(--type-giant);
-  --font-size-hero: var(--type-hero);
-  --font-size-display: var(--type-statement);
-  --font-size-label: var(--type-label);
-  --line-height-display: var(--line-display);
-  --tracking-display: var(--tracking-tight);
-  --tracking-mega: var(--tracking-tighter);
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xl: 1.5rem;
-  --font-size-2xl: 2rem;
-  --line-height-tight: 1.1;
-  --line-height-base: 1.4;
-  --duration-instant: 0ms;
-  --easing-none: linear;
+const dim = (d, { asRem = false } = {}) => {
+  if (isAlias(d)) return ref(d)
+  if (d.value === 0) return '0'
+  if (asRem && d.unit === 'px') return `${num(d.value / 16)}rem`
+  return `${num(d.value)}${d.unit}`
 }
-`)
-L("/* ---------- Semantic colour (Figma: Color — Light mode) ---------- */")
-L("[data-theme='light'] {")
-for (const [k, m] of Object.entries(t.color)) if (m.light !== m.dark) L(`  --${k}: var(--${m.light});`)
-L('}')
+const color = (c) => {
+  if (isAlias(c)) return ref(c)
+  if (c.alpha === undefined || c.alpha === 1) return c.hex
+  const [r, g, b] = c.components.map((x) => Math.round(x * 255))
+  return `rgba(${r}, ${g}, ${b}, ${num(c.alpha)})`
+}
+const family = (f) => (isAlias(f) ? ref(f) : f.map((n) => (GENERIC.has(n) || /^[A-Za-z]+$/.test(n) ? n : `'${n}'`)).join(', '))
+const resolve = (v) => (isAlias(v) ? resolve(byPath.get(aliasPath(v)).value) : v)
+
+function css(tok) {
+  const { type, value: v, ext } = tok
+  if (isAlias(v)) return ref(v)
+  switch (type) {
+    case 'color': return color(v)
+    case 'dimension': return dim(v, { asRem: tok.path[1] === 'space' })
+    case 'number': return ext.cssUnit ? `${num(v)}${ext.cssUnit}` : `${num(v)}`
+    case 'fontFamily': return family(v)
+    case 'fontWeight': return `${v}`
+    case 'duration': return `${num(v.value)}${v.unit}`
+    case 'cubicBezier': return v.join() === '0,0,1,1' ? 'linear' : `cubic-bezier(${v.join(', ')})`
+    case 'shadow': return [].concat(v).map((l) => `${dim(l.offsetX)} ${dim(l.offsetY)} ${dim(l.blur)} ${dim(l.spread)} ${color(l.color)}`).join(', ')
+    case 'typography': return `${v.fontWeight} ${dim(v.fontSize)}/${v.lineHeight} ${family(v.fontFamily)}`
+    default: throw new Error(`Unsupported $type ${type} at ${tok.path.join('.')}`)
+  }
+}
+// Text styles: letterSpacing is px in DTCG; CSS emits it relative to the font size (em), like Figma's percent.
+const trackingEm = (v) => {
+  const ls = resolve(v.letterSpacing), size = resolve(v.fontSize)
+  return ls.value === 0 ? '0' : `${num(ls.value / size.value)}em`
+}
+
+// ---------- tokens.css ----------
+const SECTIONS = [
+  ['primitive', 'Primitives (Figma: Primitives)'],
+  ['semantic', 'Semantic colour — dark is the default ground (Figma: Color, Dark mode)'],
+  ['dimension', 'Dimensions & layout grids (Figma: Spacing; code-only: type ramp, font-size scale, slide canvas)'],
+  ['typography', 'Typography (Figma: text styles; families, weights, tracking are code-only)'],
+  ['effect', 'Effects (Figma: effect styles)'],
+  ['motion', 'Motion (code-only)'],
+  ['component', 'Component tokens (Figma: Component)'],
+]
+const lines = [HEADER + ':root {']
+for (const [tier, title] of SECTIONS) {
+  lines.push(`  /* ---------- ${title} ---------- */`)
+  for (const tok of tokens.filter((t) => t.path[0] === tier)) {
+    lines.push(`  --${cssName(tok.path)}: ${css(tok)};`)
+    if (tok.type === 'typography') lines.push(`  --tracking-${cssName(tok.path).replace(/^text-/, '')}: ${trackingEm(tok.value)};`)
+  }
+  lines.push('')
+}
+lines[lines.length - 1] = '}'
+lines.push('', "/* ---------- Semantic colour — light mode (Figma: Color, Light mode) ---------- */", "[data-theme='light'] {")
+for (const tok of themes.light) {
+  const dark = themes.dark.find((d) => d.path.join('.') === tok.path.join('.'))
+  if (!dark || JSON.stringify(dark.value) !== JSON.stringify(tok.value)) lines.push(`  --${cssName(tok.path)}: ${css(tok)};`)
+}
+lines.push('}')
 const tokensCss = lines.join('\n') + '\n'
 
+// ---------- text-styles.css ----------
 const ts = [HEADER + '/* One class per text style. Use these instead of literal sizes. */']
-for (const [k, s] of Object.entries(t.textStyles)) {
-  ts.push(`.text-${k} { font: var(--text-${k}); letter-spacing: var(--tracking-${k});${s.uppercase ? ' text-transform: uppercase;' : ''} margin: 0; }`)
+for (const tok of tokens.filter((t) => t.type === 'typography')) {
+  const k = cssName(tok.path).replace(/^text-/, '')
+  ts.push(`.text-${k} { font: var(--text-${k}); letter-spacing: var(--tracking-${k});${tok.ext.textCase === 'uppercase' ? ' text-transform: uppercase;' : ''} margin: 0; }`)
 }
 const textCss = ts.join('\n') + '\n'
 
-// ---------- tokens.md: a readable reference for people and Claude ----------
-const md = ['<!-- GENERATED from tokens/tokens.json by scripts/build-tokens.mjs — do not edit by hand. -->', '# Above tokens', '',
-  'Use the CSS custom property in code. Never hardcode a colour, size or spacing value. Figma names are shown where they differ.', '']
-const table = (title, head, rows) => { md.push(`## ${title}`, '', `| ${head.join(' | ')} |`, `| ${head.map(() => '---').join(' | ')} |`, ...rows.map((r) => `| ${r.join(' | ')} |`), '') }
-table('Primitives', ['Token', 'Value'], entries(t.primitive).map(([k, v]) => [`\`--${k}\``, `\`${v}\``]))
-table('Semantic colour', ['Token', 'Dark', 'Light'], entries(t.color).map(([k, m]) => [`\`--${k}\``, `\`--${m.dark}\``, `\`--${m.light}\``]))
-table('Dimensions', ['Token', 'Value'], entries(t.dimension).map(([k, v]) => [`\`--${k}\``, `${v}px`]))
-table('Layout grids', ['Token', 'Value'], entries(t.grid).map(([k, v]) => [`\`--${k}\``, /-(columns|rows)$/.test(k) ? `${v}` : `${v}px`]))
-table('Component tokens', ['Token', 'Value'], entries(t.component).map(([k, v]) => [`\`--${k}\``, typeof v === 'number' ? `${v}px` : /^\{/.test(v) ? `→ \`--${v.slice(1, -1)}\`` : `\`${v}\` (code-only)`]))
-table('Text styles', ['Class', 'Figma', 'Font', 'Size / line', 'Tracking'], entries(t.textStyles).map(([k, s]) => [`\`.text-${k}\``, s.figma, `${s.family} ${s.weight}${s.uppercase ? ', uppercase' : ''}`, `${s.size}px / ${s.lineHeight}`, `${s.tracking}em`]))
-table('Effects', ['Token', 'Figma'], entries(t.effects).map(([k, e]) => [`\`--${k}\``, e.figma]))
+// ---------- tokens.md ----------
+const show = (tok) => {
+  const v = tok.value
+  if (isAlias(v)) return `→ \`--${cssName(byPath.get(aliasPath(v)).path)}\``
+  if (tok.type === 'typography') return `${resolve(v.fontSize).value}px / ${v.lineHeight}, weight ${v.fontWeight}, tracking ${trackingEm(v)}`
+  if (tok.type === 'shadow') return `${[].concat(v).length} layer(s)`
+  return `\`${css(tok)}\``
+}
+const md = ['<!-- GENERATED from tokens/*.tokens.json by scripts/build-tokens.mjs — do not edit by hand. -->', '# Above tokens', '',
+  'Source: the DTCG 2025.10 files in `tokens/` (entry point `tokens/above.resolver.json`). Use the CSS custom property in code;',
+  'never hardcode a colour, size or spacing value. "Code-only" tokens are not mirrored in Figma.', '']
+for (const [tier, title] of SECTIONS) {
+  const rows = tokens.filter((t) => t.path[0] === tier)
+  if (tier === 'semantic') {
+    md.push(`## ${title.split(' (')[0]}`, '', '| Token | DTCG path | Dark | Light |', '| --- | --- | --- | --- |')
+    for (const t of rows) {
+      const l = themes.light.find((x) => x.path.join('.') === t.path.join('.'))
+      md.push(`| \`--${cssName(t.path)}\` | \`${t.path.join('.')}\` | ${show(t)} | ${l ? show(l) : show(t)} |`)
+    }
+    md.push('')
+    continue
+  }
+  md.push(`## ${title.split(' (')[0]}`, '', '| Token | DTCG path | Type | Value | Figma |', '| --- | --- | --- | --- | --- |')
+  for (const t of rows) md.push(`| \`--${cssName(t.path)}\` | \`${t.path.join('.')}\` | ${t.type} | ${show(t)} | ${t.ext.codeOnly ? 'code-only' : t.ext.figma || '✓'} |`)
+  md.push('')
+}
 const tokensMd = md.join('\n')
 
+// ---------- write / check ----------
 const out = [
   [new URL('src/styles/tokens.css', root), tokensCss],
   [new URL('src/styles/text-styles.css', root), textCss],

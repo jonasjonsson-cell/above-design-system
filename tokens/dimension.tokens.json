@@ -1,0 +1,365 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "dimension": {
+    "$type": "dimension",
+    "$description": "Spacing, layout, radius, border, size and grid. Figma: Spacing collection. space-* emit as rem. CSS: --<group>-<name>.",
+    "space": {
+      "1": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        }
+      },
+      "3": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        }
+      },
+      "4": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "6": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        }
+      },
+      "8": {
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        }
+      },
+      "12": {
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
+      },
+      "margin-x": {
+        "$value": "{dimension.margin.x}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "margin-header": {
+        "$value": "{dimension.margin.header}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "margin": {
+      "x": {
+        "$value": {
+          "value": 18,
+          "unit": "px"
+        }
+      },
+      "header": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        }
+      }
+    },
+    "header": {
+      "top": {
+        "$value": {
+          "value": 9,
+          "unit": "px"
+        }
+      }
+    },
+    "radius": {
+      "none": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "card": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        }
+      }
+    },
+    "border": {
+      "width": {
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        }
+      },
+      "width-photo": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        }
+      }
+    },
+    "size": {
+      "tab-w": {
+        "$value": {
+          "value": 42,
+          "unit": "px"
+        }
+      },
+      "tab-h": {
+        "$value": {
+          "value": 9,
+          "unit": "px"
+        }
+      }
+    },
+    "grid": {
+      "slide": {
+        "columns": {
+          "$type": "number",
+          "$value": 12
+        },
+        "rows": {
+          "$type": "number",
+          "$value": 8
+        },
+        "gutter": {
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          }
+        },
+        "margin": {
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          }
+        }
+      },
+      "page": {
+        "columns": {
+          "$type": "number",
+          "$value": 24
+        },
+        "gutter": {
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          }
+        },
+        "margin": {
+          "$value": {
+            "value": 64,
+            "unit": "px"
+          }
+        }
+      },
+      "$description": "Layout grids. Figma: grid/… variables + grid styles Grid/Slide and Grid/Page."
+    },
+    "type": {
+      "$description": "Deck type ramp (code-only). Deck text styles alias these.",
+      "mega": {
+        "$value": {
+          "value": 515,
+          "unit": "px"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "giant": {
+        "$value": {
+          "value": 240,
+          "unit": "px"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "hero": {
+        "$value": {
+          "value": 160,
+          "unit": "px"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "statement": {
+        "$value": {
+          "value": 96,
+          "unit": "px"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "label": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "font-size": {
+      "$description": "Font-size scale (code-only).",
+      "mega": {
+        "$value": "{dimension.type.mega}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "giant": {
+        "$value": "{dimension.type.giant}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "hero": {
+        "$value": "{dimension.type.hero}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "display": {
+        "$value": "{dimension.type.statement}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "label": {
+        "$value": "{dimension.type.label}",
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "xs": {
+        "$value": {
+          "value": 0.75,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "sm": {
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "md": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "lg": {
+        "$value": {
+          "value": 1.25,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "xl": {
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "2xl": {
+        "$value": {
+          "value": 2,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    },
+    "slide": {
+      "w": {
+        "$value": {
+          "value": 1920,
+          "unit": "px"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "h": {
+        "$value": {
+          "value": 1080,
+          "unit": "px"
+        },
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      }
+    }
+  }
+}

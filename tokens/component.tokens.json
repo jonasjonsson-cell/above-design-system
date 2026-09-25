@@ -1,0 +1,180 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "component": {
+    "$type": "dimension",
+    "$description": "Component-tier tokens. Figma: Component collection (aliases to Spacing where the value is a spacing step).",
+    "button": {
+      "gap": {
+        "$value": "{dimension.space.2}"
+      },
+      "padding-y-sm": {
+        "$value": "{dimension.space.1}"
+      },
+      "padding-x-sm": {
+        "$value": "{dimension.space.3}"
+      },
+      "padding-y-md": {
+        "$value": "{dimension.space.2}"
+      },
+      "padding-x-md": {
+        "$value": "{dimension.space.4}"
+      },
+      "padding-y-lg": {
+        "$value": "{dimension.space.3}"
+      },
+      "padding-x-lg": {
+        "$value": "{dimension.space.6}"
+      }
+    },
+    "slide": {
+      "header-height": {
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        }
+      },
+      "header-top": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "header-font-size": {
+        "$value": {
+          "value": 13,
+          "unit": "px"
+        }
+      },
+      "content-top": {
+        "$value": {
+          "value": 150,
+          "unit": "px"
+        }
+      },
+      "content-top-kicker": {
+        "$value": {
+          "value": 360,
+          "unit": "px"
+        }
+      },
+      "statement-width": {
+        "$value": {
+          "value": 1820,
+          "unit": "px"
+        }
+      },
+      "statement-line-height": {
+        "$type": "number",
+        "$value": 0.84,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true
+          }
+        }
+      },
+      "summary-gap": {
+        "$value": "{dimension.space.6}"
+      },
+      "mega-left": {
+        "$value": {
+          "value": 6,
+          "unit": "px"
+        }
+      },
+      "mega-top": {
+        "$value": {
+          "value": 640,
+          "unit": "px"
+        }
+      },
+      "mega-size": {
+        "$value": {
+          "value": 516,
+          "unit": "px"
+        }
+      },
+      "cover-word-left": {
+        "$value": {
+          "value": 111,
+          "unit": "px"
+        }
+      },
+      "cover-word-top": {
+        "$value": {
+          "value": 100,
+          "unit": "px"
+        }
+      },
+      "cover-sub-left": {
+        "$value": {
+          "value": 115,
+          "unit": "px"
+        }
+      },
+      "cover-sub-top": {
+        "$value": {
+          "value": 360,
+          "unit": "px"
+        }
+      },
+      "cover-sub-size": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        }
+      },
+      "cover-logo-inset": {
+        "$value": {
+          "value": 112,
+          "unit": "px"
+        }
+      },
+      "photo-right": {
+        "$value": {
+          "value": 150,
+          "unit": "px"
+        }
+      },
+      "photo-top": {
+        "$value": {
+          "value": 470,
+          "unit": "px"
+        }
+      },
+      "photo-height": {
+        "$value": {
+          "value": 446,
+          "unit": "px"
+        }
+      },
+      "glyph-right": {
+        "$value": {
+          "value": 90,
+          "unit": "px"
+        }
+      },
+      "glyph-top": {
+        "$value": {
+          "value": 300,
+          "unit": "px"
+        }
+      },
+      "glyph-size": {
+        "$value": {
+          "value": 560,
+          "unit": "px"
+        }
+      },
+      "glyph-rotate": {
+        "$type": "number",
+        "$value": 6,
+        "$extensions": {
+          "se.above": {
+            "codeOnly": true,
+            "cssUnit": "deg"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-/* GENERATED from tokens/tokens.json by scripts/build-tokens.mjs — do not edit by hand. */
+/* GENERATED from tokens/*.tokens.json by scripts/build-tokens.mjs — do not edit by hand. */
 :root {
   /* ---------- Primitives (Figma: Primitives) ---------- */
   --black: #000000;
@@ -22,31 +22,100 @@
   --ink2: rgba(0, 0, 0, 0.5);
   --ink3: rgba(0, 0, 0, 0.3);
 
+  /* ---------- Semantic colour — dark is the default ground (Figma: Color, Dark mode) ---------- */
   --bg-dark: var(--black);
   --bg-light: var(--offwhite);
   --fg-on-dark: var(--white);
   --fg-on-light: var(--black);
+  --color-bg: var(--black);
+  --color-surface: var(--black);
+  --color-surface-raised: var(--neutral-grey-04);
+  --color-text: var(--fg1);
+  --color-text-muted: var(--fg2);
+  --color-text-subtle: var(--fg3);
+  --color-border: var(--fg3);
+  --color-border-strong: var(--white);
+  --color-accent: var(--white);
+  --color-on-accent: var(--black);
+  --color-focus-ring: var(--white);
+  --color-photo-border: var(--white);
+  --color-highlight: var(--primary-green-01);
+  --color-on-highlight: var(--primary-green-03);
 
-  /* ---------- Type families & deck ramp (code-only) ---------- */
-  --font-display: 'Suisse BP Intl', 'Helvetica Neue', Arial, sans-serif;
-  --font-label: 'KH Interference', ui-monospace, 'SFMono-Regular', monospace;
-  --font-serif: 'Suisse BP Serif', Georgia, 'Times New Roman', serif;
-  --font-neue: 'Suisse BP Neue', 'Suisse BP Serif', Georgia, serif; /* a serif, despite the deck README */
-  --font-antique: 'Suisse BP Intl Antique', 'Suisse BP Intl', sans-serif;
+  /* ---------- Dimensions & layout grids (Figma: Spacing; code-only: type ramp, font-size scale, slide canvas) ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-margin-x: var(--margin-x);
+  --space-margin-header: var(--margin-header);
+  --margin-x: 18px;
+  --margin-header: 20px;
+  --header-top: 9px;
+  --radius-none: 0;
+  --radius-card: 4px;
+  --border-width: 1px;
+  --border-width-photo: 8px;
+  --size-tab-w: 42px;
+  --size-tab-h: 9px;
+  --grid-slide-columns: 12;
+  --grid-slide-rows: 8;
+  --grid-slide-gutter: 20px;
+  --grid-slide-margin: 20px;
+  --grid-page-columns: 24;
+  --grid-page-gutter: 32px;
+  --grid-page-margin: 64px;
   --type-mega: 515px;
   --type-giant: 240px;
   --type-hero: 160px;
   --type-statement: 96px;
   --type-label: 12px;
+  --font-size-mega: var(--type-mega);
+  --font-size-giant: var(--type-giant);
+  --font-size-hero: var(--type-hero);
+  --font-size-display: var(--type-statement);
+  --font-size-label: var(--type-label);
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+
+  /* ---------- Typography (Figma: text styles; families, weights, tracking are code-only) ---------- */
+  --font-display: 'Suisse BP Intl', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'KH Interference', ui-monospace, 'SFMono-Regular', monospace;
+  --font-serif: 'Suisse BP Serif', Georgia, 'Times New Roman', serif;
+  --font-neue: 'Suisse BP Neue', 'Suisse BP Serif', Georgia, serif;
+  --font-antique: 'Suisse BP Intl Antique', 'Suisse BP Intl', sans-serif;
+  --font-family-display: var(--font-display);
+  --font-family-label: var(--font-label);
+  --font-family-serif: var(--font-serif);
+  --font-family-neue: var(--font-neue);
+  --font-family-base: var(--font-display);
+  --font-weight-thin: 100;
+  --font-weight-ultralight: 200;
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
   --line-display: 0.8;
+  --line-height-display: var(--line-display);
+  --line-height-tight: 1.1;
+  --line-height-base: 1.4;
   --tracking-cover: -0.04em;
   --tracking-tight: -0.05em;
   --tracking-tighter: -0.08em;
   --tracking-label: 0.06em;
-  --slide-w: 1920px;
-  --slide-h: 1080px;
-
-  /* ---------- Text styles (Figma: text styles) ---------- */
+  --tracking-label-text: 0.06em;
+  --tracking-display: var(--tracking-tight);
+  --tracking-mega: var(--tracking-tighter);
   --text-display-l: 400 220px/0.75 var(--font-display);
   --tracking-display-l: -0.06em;
   --text-display-s: 400 180px/0.8 var(--font-display);
@@ -75,46 +144,24 @@
   --tracking-list-s: 0;
   --text-label-l: 400 16px/1.2 var(--font-label);
   --tracking-label-l: 0.06em;
-  --text-label-s: 400 12px/1.2 var(--font-label);
+  --text-label-s: 400 var(--type-label)/1.2 var(--font-label);
   --tracking-label-s: 0.06em;
-  --text-deck-mega: 400 515px/0.8 var(--font-display);
+  --text-deck-mega: 400 var(--type-mega)/0.8 var(--font-display);
   --tracking-deck-mega: -0.08em;
-  --text-deck-giant: 400 240px/0.8 var(--font-display);
+  --text-deck-giant: 400 var(--type-giant)/0.8 var(--font-display);
   --tracking-deck-giant: -0.04em;
-  --text-deck-hero: 400 160px/0.8 var(--font-display);
+  --text-deck-hero: 400 var(--type-hero)/0.8 var(--font-display);
   --tracking-deck-hero: -0.05em;
-  --text-deck-statement: 400 96px/0.84 var(--font-display);
+  --text-deck-statement: 400 var(--type-statement)/0.84 var(--font-display);
   --tracking-deck-statement: -0.05em;
-  --tracking-label-text: 0.06em;
 
-  /* ---------- Dimensions (Figma: Spacing) ---------- */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-12: 3rem;
-  --margin-x: 18px;
-  --margin-header: 20px;
-  --header-top: 9px;
-  --radius-none: 0;
-  --radius-card: 4px;
-  --border-width: 1px;
-  --border-width-photo: 8px;
-  --size-tab-w: 42px;
-  --size-tab-h: 9px;
-  --space-margin-x: var(--margin-x);
-  --space-margin-header: var(--margin-header);
+  /* ---------- Effects (Figma: effect styles) ---------- */
+  --shadow-card: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 0 2px 0 rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.2);
+  --rotate-card: -9deg;
 
-  /* ---------- Layout grids (Figma: Spacing grid/… + grid styles) ---------- */
-  --grid-slide-columns: 12;
-  --grid-slide-rows: 8;
-  --grid-slide-gutter: 20px;
-  --grid-slide-margin: 20px;
-  --grid-page-columns: 24;
-  --grid-page-gutter: 32px;
-  --grid-page-margin: 64px;
+  /* ---------- Motion (code-only) ---------- */
+  --duration-instant: 0ms;
+  --easing-none: linear;
 
   /* ---------- Component tokens (Figma: Component) ---------- */
   --button-gap: var(--space-2);
@@ -148,61 +195,9 @@
   --slide-glyph-top: 300px;
   --slide-glyph-size: 560px;
   --slide-glyph-rotate: 6deg;
-
-  /* ---------- Effects (Figma: effect styles) ---------- */
-  --shadow-card: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 0 2px 0 rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.2);
-  --rotate-card: -9deg;
-
-  /* ---------- Semantic colour (Figma: Color — Dark mode) ---------- */
-  --color-bg: var(--black);
-  --color-surface: var(--black);
-  --color-surface-raised: var(--neutral-grey-04);
-  --color-text: var(--fg1);
-  --color-text-muted: var(--fg2);
-  --color-text-subtle: var(--fg3);
-  --color-border: var(--fg3);
-  --color-border-strong: var(--white);
-  --color-accent: var(--white);
-  --color-on-accent: var(--black);
-  --color-focus-ring: var(--white);
-  --color-photo-border: var(--white);
-  --color-highlight: var(--primary-green-01);
-  --color-on-highlight: var(--primary-green-03);
-
-  /* ---------- Semantic type & UI scale (code-only) ---------- */
-  --font-family-display: var(--font-display);
-  --font-family-label: var(--font-label);
-  --font-family-serif: var(--font-serif);
-  --font-family-neue: var(--font-neue);
-  --font-family-base: var(--font-display);
-  --font-weight-thin: 100;
-  --font-weight-ultralight: 200;
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
-  --font-weight-black: 900;
-  --font-size-mega: var(--type-mega);
-  --font-size-giant: var(--type-giant);
-  --font-size-hero: var(--type-hero);
-  --font-size-display: var(--type-statement);
-  --font-size-label: var(--type-label);
-  --line-height-display: var(--line-display);
-  --tracking-display: var(--tracking-tight);
-  --tracking-mega: var(--tracking-tighter);
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 1.25rem;
-  --font-size-xl: 1.5rem;
-  --font-size-2xl: 2rem;
-  --line-height-tight: 1.1;
-  --line-height-base: 1.4;
-  --duration-instant: 0ms;
-  --easing-none: linear;
 }
 
-/* ---------- Semantic colour (Figma: Color — Light mode) ---------- */
+/* ---------- Semantic colour — light mode (Figma: Color, Light mode) ---------- */
 [data-theme='light'] {
   --color-bg: var(--offwhite);
   --color-surface: var(--offwhite);
