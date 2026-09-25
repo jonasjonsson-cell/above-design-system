@@ -3,15 +3,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
+  gap: var(--button-gap);
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-none);
   cursor: pointer;
   transition: none;
 }
-.above-button--sm { padding: var(--space-1) var(--space-3); font: var(--text-body-s); }
-.above-button--md { padding: var(--space-2) var(--space-4); font: var(--text-body-m); }
-.above-button--lg { padding: var(--space-3) var(--space-6); font: var(--text-body-l); }
+.above-button--sm { padding: var(--button-padding-y-sm) var(--button-padding-x-sm); font: var(--text-body-s); }
+.above-button--md { padding: var(--button-padding-y-md) var(--button-padding-x-md); font: var(--text-body-m); }
+.above-button--lg { padding: var(--button-padding-y-lg) var(--button-padding-x-lg); font: var(--text-body-l); }
 
 .above-button--primary { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
 .above-button--primary:hover:not(:disabled) { background: transparent; color: var(--color-accent); }

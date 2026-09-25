@@ -107,6 +107,48 @@
   --space-margin-x: var(--margin-x);
   --space-margin-header: var(--margin-header);
 
+  /* ---------- Layout grids (Figma: Spacing grid/… + grid styles) ---------- */
+  --grid-slide-columns: 12;
+  --grid-slide-rows: 8;
+  --grid-slide-gutter: 20px;
+  --grid-slide-margin: 20px;
+  --grid-page-columns: 24;
+  --grid-page-gutter: 32px;
+  --grid-page-margin: 64px;
+
+  /* ---------- Component tokens (Figma: Component) ---------- */
+  --button-gap: var(--space-2);
+  --button-padding-y-sm: var(--space-1);
+  --button-padding-x-sm: var(--space-3);
+  --button-padding-y-md: var(--space-2);
+  --button-padding-x-md: var(--space-4);
+  --button-padding-y-lg: var(--space-3);
+  --button-padding-x-lg: var(--space-6);
+  --slide-header-height: 48px;
+  --slide-header-top: 16px;
+  --slide-header-font-size: 13px;
+  --slide-content-top: 150px;
+  --slide-content-top-kicker: 360px;
+  --slide-statement-width: 1820px;
+  --slide-statement-line-height: 0.84;
+  --slide-summary-gap: var(--space-6);
+  --slide-mega-left: 6px;
+  --slide-mega-top: 640px;
+  --slide-mega-size: 516px;
+  --slide-cover-word-left: 111px;
+  --slide-cover-word-top: 100px;
+  --slide-cover-sub-left: 115px;
+  --slide-cover-sub-top: 360px;
+  --slide-cover-sub-size: 16px;
+  --slide-cover-logo-inset: 112px;
+  --slide-photo-right: 150px;
+  --slide-photo-top: 470px;
+  --slide-photo-height: 446px;
+  --slide-glyph-right: 90px;
+  --slide-glyph-top: 300px;
+  --slide-glyph-size: 560px;
+  --slide-glyph-rotate: 6deg;
+
   /* ---------- Effects (Figma: effect styles) ---------- */
   --shadow-card: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 0 2px 0 rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.2);
   --rotate-card: -9deg;

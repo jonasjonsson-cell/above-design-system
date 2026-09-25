@@ -4,7 +4,7 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 # Layout
 
-- **Grid.** All slide templates carry a layout grid — use it to keep content aligned across slides with consistent spacing and proportions (toggle in Figma with Shift + G). 12 columns on the 1920×1080 canvas with a `--margin-x` (18–20px) outer margin.
+- **Grid.** All slide templates carry a layout grid — use it to keep content aligned across slides with consistent spacing and proportions (toggle in Figma with Shift + G). Slides use **Grid/Slide**: 12 columns × 8 rows on the 1920×1080 canvas, 20px gutter and 20px margin (`--grid-slide-columns`, `--grid-slide-rows`, `--grid-slide-gutter`, `--grid-slide-margin`). Long-form pages use **Grid/Page**: 24 columns, 32px gutter, 64px margin (`--grid-page-*`). Slide positions (header, content top, photo, cover) are component tokens (`--slide-*`) — see `tokens/tokens.md`.
 - **Breathing room.** Content always gets enough white space. Stick to the grid and deliberately keep areas of the slide empty.
 - **Content layouts.** Editorial (text + image), simple, and text only.
 - **Section title.** Structures long presentations — use the space to give a rundown of what follows.

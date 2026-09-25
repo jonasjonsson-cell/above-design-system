@@ -6,6 +6,8 @@ Ask Claude: "push tokens to Figma". It runs `use_figma` scripts that upsert, by 
 - `primitive` → collection **Primitives** (`base/`, `neutral/`, `primary/`, `secondary/`, `emphasis/`), scopes hidden
 - `color` → collection **Color**, modes Dark / Light, aliased to primitives
 - `dimension` → collection **Spacing** (`space/`, `radius/`, `border/`, `size/`, `layout/`)
+- `grid` → collection **Spacing** (`grid/…`, counts unscoped) + grid styles **Grid/Slide** (12 col × 8 rows) and **Grid/Page** (24 col), bound to those variables
+- `component` → collection **Component** (`button/…`, `slide/…`); `"{name}"` values become aliases; raw CSS strings (e.g. `6deg`) stay code-only
 - `textStyles` → text styles (name from `figma`, description `CSS: .text-<key>`)
 - `effects` → effect styles (description `CSS: var(--<key>)`)
 

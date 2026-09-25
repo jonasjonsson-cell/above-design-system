@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Generates src/styles/tokens.css and src/styles/text-styles.css from tokens/tokens.json.
+// Generates src/styles/tokens.css, src/styles/text-styles.css and tokens/tokens.md from tokens/tokens.json.
 // Usage: node scripts/build-tokens.mjs          (write)
 //        node scripts/build-tokens.mjs --check  (fail if the CSS is out of date — used in CI)
 import { readFileSync, writeFileSync } from 'node:fs'
@@ -10,6 +10,9 @@ const HEADER = '/* GENERATED from tokens/tokens.json by scripts/build-tokens.mjs
 const rem = (px) => (px === 0 ? '0' : `${+(px / 16).toFixed(4)}rem`)
 const px = (n) => (n === 0 ? '0' : `${n}px`)
 const em = (n) => (n === 0 ? '0' : `${n}em`)
+const entries = (o) => Object.entries(o || {}).filter(([k]) => !k.startsWith('$'))
+// Component values: number → px, "{name}" → var(--name), other strings → raw CSS (code-only).
+const compVal = (v) => (typeof v === 'number' ? px(v) : /^\{[\w-]+\}$/.test(v) ? `var(--${v.slice(1, -1)})` : v)
 const family = { display: 'var(--font-display)', label: 'var(--font-label)' }
 
 const lines = []
@@ -50,6 +53,12 @@ L('  /* ---------- Dimensions (Figma: Spacing) ---------- */')
 for (const [k, v] of Object.entries(t.dimension)) L(`  --${k}: ${k.startsWith('space-') ? rem(v) : px(v)};`)
 L('  --space-margin-x: var(--margin-x);')
 L('  --space-margin-header: var(--margin-header);')
+L('')
+L('  /* ---------- Layout grids (Figma: Spacing grid/… + grid styles) ---------- */')
+for (const [k, v] of entries(t.grid)) L(`  --${k}: ${/-(columns|rows)$/.test(k) ? v : px(v)};`)
+L('')
+L('  /* ---------- Component tokens (Figma: Component) ---------- */')
+for (const [k, v] of entries(t.component)) L(`  --${k}: ${compVal(v)};`)
 L('')
 L('  /* ---------- Effects (Figma: effect styles) ---------- */')
 for (const [k, e] of Object.entries(t.effects)) L(`  --${k}: ${e.layers.map((l) => `${px(l.x)} ${px(l.y)} ${px(l.blur)} ${px(l.spread)} ${l.color}`).join(', ')};`)
@@ -103,12 +112,27 @@ for (const [k, s] of Object.entries(t.textStyles)) {
 }
 const textCss = ts.join('\n') + '\n'
 
+// ---------- tokens.md: a readable reference for people and Claude ----------
+const md = ['<!-- GENERATED from tokens/tokens.json by scripts/build-tokens.mjs — do not edit by hand. -->', '# Above tokens', '',
+  'Use the CSS custom property in code. Never hardcode a colour, size or spacing value. Figma names are shown where they differ.', '']
+const table = (title, head, rows) => { md.push(`## ${title}`, '', `| ${head.join(' | ')} |`, `| ${head.map(() => '---').join(' | ')} |`, ...rows.map((r) => `| ${r.join(' | ')} |`), '') }
+table('Primitives', ['Token', 'Value'], entries(t.primitive).map(([k, v]) => [`\`--${k}\``, `\`${v}\``]))
+table('Semantic colour', ['Token', 'Dark', 'Light'], entries(t.color).map(([k, m]) => [`\`--${k}\``, `\`--${m.dark}\``, `\`--${m.light}\``]))
+table('Dimensions', ['Token', 'Value'], entries(t.dimension).map(([k, v]) => [`\`--${k}\``, `${v}px`]))
+table('Layout grids', ['Token', 'Value'], entries(t.grid).map(([k, v]) => [`\`--${k}\``, /-(columns|rows)$/.test(k) ? `${v}` : `${v}px`]))
+table('Component tokens', ['Token', 'Value'], entries(t.component).map(([k, v]) => [`\`--${k}\``, typeof v === 'number' ? `${v}px` : /^\{/.test(v) ? `→ \`--${v.slice(1, -1)}\`` : `\`${v}\` (code-only)`]))
+table('Text styles', ['Class', 'Figma', 'Font', 'Size / line', 'Tracking'], entries(t.textStyles).map(([k, s]) => [`\`.text-${k}\``, s.figma, `${s.family} ${s.weight}${s.uppercase ? ', uppercase' : ''}`, `${s.size}px / ${s.lineHeight}`, `${s.tracking}em`]))
+table('Effects', ['Token', 'Figma'], entries(t.effects).map(([k, e]) => [`\`--${k}\``, e.figma]))
+const tokensMd = md.join('\n')
+
 const out = [
   [new URL('src/styles/tokens.css', root), tokensCss],
   [new URL('src/styles/text-styles.css', root), textCss],
+  [new URL('tokens/tokens.md', root), tokensMd],
 ]
 if (process.argv.includes('--check')) {
-  const stale = out.filter(([f, c]) => readFileSync(f, 'utf8') !== c)
+  const read = (f) => { try { return readFileSync(f, 'utf8') } catch { return '' } }
+  const stale = out.filter(([f, c]) => read(f) !== c)
   if (stale.length) {
     console.error('Out of date — run `npm run tokens`:', stale.map(([f]) => f.pathname).join(', '))
     process.exit(1)
@@ -116,5 +140,5 @@ if (process.argv.includes('--check')) {
   console.log('tokens up to date')
 } else {
   for (const [f, c] of out) writeFileSync(f, c)
-  console.log('wrote tokens.css + text-styles.css')
+  console.log('wrote tokens.css, text-styles.css, tokens.md')
 }

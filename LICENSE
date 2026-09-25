@@ -1,0 +1,16 @@
+Copyright (c) 2026 Above Agency. All rights reserved.
+
+This repository and everything in it (source code, design tokens, documentation,
+brand assets and the published Storybook) is proprietary and confidential to
+Above Agency. No licence is granted to copy, modify, distribute or use any part
+of it outside Above Agency and the Eidra group without written permission.
+
+Third-party material
+- Fonts in public/fonts/ (Suisse BP Int'l, Suisse BP Int'l Antique, Suisse BP
+  Serif, Suisse BP Neue by Swiss Typefaces; KH Interference by KH Type) are
+  licensed to Above under the foundries' own terms. They are not covered by this
+  notice and must not be redistributed. Keep this repository and the published
+  Storybook access-restricted.
+- Open-source dependencies installed via npm (React, Storybook, Vite, TypeScript,
+  Chromatic CLI, and others) are used under their own licences (MIT, Apache-2.0
+  or similar); see each package in node_modules for its licence text.

@@ -12,10 +12,12 @@ npm run storybook   # http://localhost:6006
 
 ## How it's organised
 
-- `src/styles/tokens.css` — **single source of truth** for color, type, spacing,
-  radius, elevation and motion. Primitives (`--above-*`) feed semantic tokens
-  (`--color-*`, `--space-*`, …). Components only read semantic tokens — never
-  hardcode a value.
+- `tokens/tokens.json` — **single source of truth** for colour, type, spacing, grids,
+  component tokens and effects. `npm run tokens` generates `src/styles/tokens.css`,
+  `src/styles/text-styles.css` and `tokens/tokens.md`. Three tiers: primitives
+  (`--black`, `--primary-green-01`) → semantic (`--color-*`, `--space-*`) →
+  component (`--button-*`, `--slide-*`). Components read semantic or component
+  tokens — never hardcode a value.
 - `src/foundations/` — Storybook pages documenting the tokens.
 - `src/components/<Name>/` — one folder per component: `Name.tsx`, `Name.css`,
   `Name.stories.tsx`.
@@ -34,7 +36,8 @@ Figma library: **Above Design System Test library** (fileKey `G9NJsMEulHxW0FhK4k
 - `tokens/tokens.json` is the single source. `npm run tokens` generates `src/styles/tokens.css` and
   `text-styles.css`; CI (`npm run tokens:check`) fails if they're edited by hand.
 - The JSON groups map 1:1 to Figma: `primitive` → Primitives, `color` → Color (Dark/Light),
-  `dimension` → Spacing, `textStyles` → text styles, `effects` → effect styles.
+  `dimension` and `grid` → Spacing (plus grid styles Grid/Slide, Grid/Page), `component` → Component,
+  `textStyles` → text styles, `effects` → effect styles. `tokens/tokens.md` is a generated, readable list of every token.
   Each Figma variable's Web code syntax `var(--name)` is the join key — don't rename it on one side only.
 - **Figma → code:** run `scripts/figma/export-tokens.js` through `use_figma`, save the JSON, then
   `node scripts/figma-to-tokens.mjs export.json && npm run tokens`. Commit → Chromatic publishes.

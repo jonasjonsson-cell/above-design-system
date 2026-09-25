@@ -9,14 +9,17 @@ const tokens = JSON.parse(readFileSync(url, 'utf8'))
 const fig = JSON.parse(readFileSync(file, 'utf8'))
 const changes = []
 const norm = (v) => (typeof v === 'string' ? v.replace(/\s+/g, '').toLowerCase() : JSON.stringify(v))
-for (const group of ['primitive', 'color', 'dimension', 'textStyles', 'effects']) {
+// Code-only values (raw CSS strings in `component`, `$description` keys) never exist in Figma — skip them in the report.
+const codeOnly = (group, k, v) => k.startsWith('$') || (group === 'component' && typeof v === 'string' && !/^\{[\w-]+\}$/.test(v))
+for (const group of ['primitive', 'color', 'dimension', 'grid', 'component', 'textStyles', 'effects']) {
+  tokens[group] ??= {}
   for (const [k, v] of Object.entries(fig[group] || {})) {
     const cur = tokens[group]?.[k]
     if (cur === undefined) changes.push(`+ ${group}.${k}`)
     else if (norm(cur) !== norm(v)) changes.push(`~ ${group}.${k}: ${JSON.stringify(cur)} → ${JSON.stringify(v)}`)
     tokens[group][k] = v
   }
-  for (const k of Object.keys(tokens[group] || {})) if (!(k in (fig[group] || {}))) changes.push(`! ${group}.${k} exists in code but not in Figma (kept)`)
+  for (const [k, v] of Object.entries(tokens[group])) if (!(k in (fig[group] || {})) && !codeOnly(group, k, v)) changes.push(`! ${group}.${k} exists in code but not in Figma (kept)`)
 }
 writeFileSync(url, JSON.stringify(tokens, null, 2) + '\n')
 console.log(changes.length ? changes.join('\n') : 'no changes')

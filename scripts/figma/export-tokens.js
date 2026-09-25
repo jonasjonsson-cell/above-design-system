@@ -11,11 +11,15 @@ const hex = (c) => {
   return c.a === undefined || c.a === 1 ? `#${h(c.r)}${h(c.g)}${h(c.b)}` : `rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${+c.a.toFixed(3)})`;
 };
 const col = (n) => cols.find((c) => c.name === n);
-const out = { primitive: {}, color: {}, dimension: {}, textStyles: {}, effects: {} };
-const P = col('Primitives'), C = col('Color'), S = col('Spacing');
+const out = { primitive: {}, color: {}, dimension: {}, grid: {}, component: {}, textStyles: {}, effects: {} };
+const P = col('Primitives'), C = col('Color'), S = col('Spacing'), K = col('Component');
 for (const v of vars) {
   if (v.variableCollectionId === P.id) out.primitive[css(v)] = hex(v.valuesByMode[P.modes[0].modeId]);
-  if (v.variableCollectionId === S.id) out.dimension[css(v)] = v.valuesByMode[S.modes[0].modeId];
+  if (v.variableCollectionId === S.id) (css(v).startsWith('grid-') ? out.grid : out.dimension)[css(v)] = v.valuesByMode[S.modes[0].modeId];
+  if (K && v.variableCollectionId === K.id) {
+    const val = v.valuesByMode[K.modes[0].modeId];
+    out.component[css(v)] = val.type === 'VARIABLE_ALIAS' ? `{${css(byId[val.id])}}` : val;
+  }
   if (v.variableCollectionId === C.id) {
     const m = {};
     for (const mode of C.modes) {
